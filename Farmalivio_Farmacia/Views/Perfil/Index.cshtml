@@ -1,0 +1,124 @@
+﻿@model Farmalivio_Farmacia.Models.usuario
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Mi Perfil</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> @(Model.nombre_user)&nbsp; @(Model.apellido_user)<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("password", "perfil")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Cambiar Contraseña</a>
+                                </div>
+                            </div><br />
+
+                            @using (Html.BeginForm("index", "perfil", FormMethod.Post, new { enctype="multipart/form-data"}))
+                            {
+                                <div class="row">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.id_usuario)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.nombre_user, htmlAttributes: new { @class = "control-label " })
+                                            @Html.EditorFor(model => model.nombre_user, new { htmlAttributes = new { @class = "form-control", @placeholder = "Digite nombre de la categoria" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.nombre_user, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.apellido_user, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.apellido_user, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.apellido_user, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.usuario_cedula, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.usuario_cedula, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.usuario_cedula, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Imagen</label>
+                                            <input type="file" name="img" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
+                                </div>
+                            }
+
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+

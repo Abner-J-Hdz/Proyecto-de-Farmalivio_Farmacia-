@@ -1,0 +1,49 @@
+﻿@model Farmalivio_Farmacia.Models.umedida
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>umedida</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_umedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_umedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_umedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_umedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

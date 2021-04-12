@@ -1,0 +1,83 @@
+﻿@model Farmalivio_Farmacia.Models.presentacion
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Presentaciones</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Presentacion<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("index", "Presentaciones")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+
+                            <!--form para buesqueda test-->
+                            <!--Tabla-->
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="row">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.nombre_presentacion, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.nombre_presentacion, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.nombre_presentacion, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.descripcion_presentacion, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.descripcion_presentacion, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.descripcion_presentacion, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessage("errorPresentacion", new { @class = "label label-danger", id = "presentacion-validacion" })
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
+                                </div>
+                            }
+                            <!-- ************* inicio paginacion ************-->
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+

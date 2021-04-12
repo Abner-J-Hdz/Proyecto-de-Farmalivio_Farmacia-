@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Devoluciones</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Devolucion<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Create", "Devoluciones")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>
+                                </div>
+                            </div><br />
+                            <!-- Form de busqueda-->
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    @using (Html.BeginForm("index", null, FormMethod.Get))
+                                    {
+                                        <div class="row">
+                                            <div class="form-inline">
+                                                <select class="form-control col-md-3" id="opcion">
+                                                    <option>Proveedor</option>
+                                                    @*<option value="descripcion">Descripción</option>*@
+                                                </select>
+                                                @Html.TextBox("busqueda", "", new { @class = "form-control", @placeholder = "Escriba para buscar" })
+                                                <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span>Buscar</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Text</td>
+                                                <td>Text</td>
+                                                <td>Text</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>---</td>
+                                                <td>---</td>
+                                                <td>---</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Contenido -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model Farmalivio_Farmacia.Models.presentacion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>presentacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_presentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_presentacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_presentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_presentacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_presentacion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

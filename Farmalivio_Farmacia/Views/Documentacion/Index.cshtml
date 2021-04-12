@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Farmacia Farmalivio</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Información del uso y manejo del Sistema<!--Nombre del catalogo actual -->
+                                    @*<a href="@Url.Action("create", "Laboratorios")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>*@
+                                </div>
+                            </div><br />
+                            <!---contenido-->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3><i class="fa fa-mouse-pointer"></i></h3>
+
+                                    <p>Módulo Venta</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-android-car"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body" style="display: block;">
+                            <h4>
+                                En este módulo se llevarán a cabo el proceso de facturación de las ventas que se realizan,<br />
+                                se podrán observar las ventas que se han realizado, así como su detalle, también se podrá <br />
+                                buscar ventas por fechas.
+                            </h4>
+                            <button type="button" class="btn btn-primary">+ Nuevo</button>
+                            <button type="button" class="btn btn-danger">X Cancelar</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                            <h4>Estos son los botones que se mostrarán para ejecutar las acciones </h4>
+                            <h4>
+                                Para poder generar una venta se deberán de llenar únicamente los siguientes campos:  producto, cantidad.<br />
+                                El sistema generará automáticamente la fecha de la venta, su id de venta y el precio total a pagar.<br />
+                                buscar ventas por fechas.
+                            </h4>
+
+                            <h4>Así mismo al usuario se le dará la opción y el permiso de poder dar de baja una factura si esta fue mal digitada.<br /></h4>
+                            <button type="button" class="alert-danger"><i class="fa fa-trash"></i></button> <h4>Anular Venta</h4>
+
+                        </div>
+                        <br /><br />
+
+                        <div class="small-box bg-blue">
+                            <div class="inner">
+                                <h3><i class="fa fa-mouse-pointer"></i></h3>
+
+                                <p>Módulo Compra</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-android-car"></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body" style="display: block;">
+                        <h4>
+                            En este módulo el administrador registrará los productos que se adquieran, al momento de registrar
+                            cada producto se irá incrementando el stock automáticamente
+                        </h4>
+                        <button type="button" class="btn btn-primary">+ Nuevo</button>
+                        <button type="button" class="btn btn-danger">X Cancelar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button><br />
+                        <h4>Estos son los botones que se mostrarán para ejecutar las acciones</h4>
+                        <h4>
+                            Para registrar una nueva compra se requerirán los siguientes datos:
+                            Código de compra, fecha, proveedor, productos, fecha de caducidad,
+                            cantidad.
+                        </h4>
+
+                        <h4>El sistema permitirá al usuario dar de baja compras realizadas.<br /></h4>
+                        <button type="button" class="alert-danger"><i class="fa fa-trash"></i></button> <h4>Anular Compra</h4>
+
+                    </div>
+                    <br /><br />
+
+
+
+                    <div class="small-box bg-gray">
+                        <div class="inner">
+                            <h3><i class="fa fa-mouse-pointer"></i></h3>
+
+                            <p>Gestión de Catálogos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-car"></i>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                    <h4>
+                        En este módulo se registrarán los muevos elementos como: proveedores, patologias, productos,
+                        presentación, Unidad de medida, etc.
+                    </h4>
+                    <button type="button" class="btn btn-primary">+ Nuevo</button>
+                    <button type="button" class="btn btn-danger">X Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button><br /><br /><br />
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-responsive ">
+
+                            <thead>
+                                <tr>
+
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        <button type="button" class="alert-success"><i class="fa fa-sign-out"></i> Mover Bodega/ Exhibición</button> <br />
+                                        <button type="button" class="alert-danger"><i class="fa fa-refresh"></i> Cambiar estado</button> <br />
+                                        <button type="button" class="alert-success"><i class="fa fa-pencil"></i> Editar</button><br />
+                                        <button type="button" class="alert-warning"><i class="fa fa-eye"></i> Ver detalle</button> <br />
+                                        <button type="button" class="alert-warning"><i class="fa fa-download"></i> Dar de baja</button> <br />
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <h4>Estos son los botones que se mostrarán para ejecutar las acciones</h4>
+                    <h4>
+                        Para registrar una nuevo elemento se deberan llenar los campos correspondientes a cada uno.
+
+                    </h4>
+
+
+                </div>
+                <br /><br />
+
+            </main>
+        </div>
+
+    </div>
+</div>
+

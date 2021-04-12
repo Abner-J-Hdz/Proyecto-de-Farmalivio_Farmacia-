@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Farmalivio_Farmacia.Models.view_rpt_ventas>
+
+@{
+    ViewBag.Title = "verventasgeneral";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>verventasgeneral</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.num_fact)
+        </th>
+        <th>Num Fact</th>
+        <th>Usuario</th>
+        <th>Cliente</th>
+        <th>Total</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_fact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total)
+        </td>
+    </tr>
+}
+
+</table>

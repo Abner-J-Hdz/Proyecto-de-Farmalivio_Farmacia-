@@ -1,0 +1,619 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Ventas</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Venta<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("index", "Ventas")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            <!---contenido-->
+                            @using (Html.BeginForm())
+                            {
+                                @*@Html.AntiForgeryToken()*@
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Cliente</label>
+                                            <div class="input-group">
+                                                <select id="id_cliente" class="form-control js-example-basic-single " name="id_cliente"></select>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" title="Cargar lista de clientes" id="btn-listar-clientes"><span class="fa fa-history"></span><i class=""></i></button>
+                                                    <button type="button" id="btn_Nuevo_cliente" title="Registrar un nuevo cliente" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorProveedor"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Fecha</label>
+                                            <input id="fecha" type="date" class="form-control" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorFechaCompra"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                    @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Numero de Factura</label>
+                                            <input id="numfact" type="text" class="form-control" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorNumFact"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                </div>
+
+                                    <!--<h3 class="text-light-blue">Añadir Producto al Detalle</h3>-->
+                                    <!--************** Añadir a detalle ***************-->
+                                    <!--***********************************************-->
+                                <div class="row bg-gray-light">
+                                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                        <h4 class="text-primary">Añadir Producto al Detalle</h4>
+                                    </div>
+                                </div>
+
+                                <div class="row bg-gray-light">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Producto</label>
+
+                                            <select id="cmbProducto" class="form-control js-example-basic-single" name="id_producto"></select>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorProducto" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Stock</label>
+                                            <input id="txtStock" type="number" disabled class="form-control" placeholder="Stock" style=" background-color: #f7a118d4; color: #ffffFF;"/>
+                                            <div class="row"><!--color amarillo   #f7a118d4-->
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorStock" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Precio(Und)</label>
+                                            <input id="txtPrecio" type="number" disabled class="form-control" placeholder="Precio" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorPrecio" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Cantidad</label>
+                                            <input id="txtCantidad" type="number" class="form-control" placeholder="Cantidad" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorCantidad" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @*<label>Agregar</label>*@
+                                            <div class="row"><label class="text-white"></label></div>
+                                            <div class="row">
+                                            </div>
+                                            <button class="btn btn-primary" type="button" id="btnAgregar"><i class="fa fa-plus"></i>&nbsp;Agregar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                    <!--************** TABLA DE DETALLE ***************-->
+                                    <!--***********************************************-->
+                                    @*<div class="row">
+                                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                                <h4 class="text-primary">Detalle Compra</h4>
+                                            </div>
+                                        </div>*@
+                                    <!--tablas de scaffold>-->
+                                    <div>
+                                        <table class="table table-bordered table-responsive" id="tabla_detalle">
+                                            <thead>
+                                                <tr>
+                                                    <td hidden="hidden"></td>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio(Und)</th>
+                                                    <th>Subtotal</th>
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td hidden="hidden"></td>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>Total: C$</th>
+                                                    <th><span class="float-right" id="Total">0</span></th>
+                                                </tr>
+                                                <tr>
+                                                    <td hidden="hidden"></td>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>Pago: C$</th>
+                                                    <th>
+                                                    <div class="input-group">
+    <input type="number" id="txt-cambio" class="form-control" />
+    <div class="input-group-btn">
+        <button class="btn btn-primary btn-flat" id="btn-calcular-cambio" type="button"><span class="fa fa-dollar" id="btn-calcular-vuelto"></span>Calcular</button>
+    </div>
+</div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td hidden="hidden"></td>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>Cambio: C$</th>
+                                                    <th>
+                                                        <span class="text-bold float-right" id="txt-vuelto"></span>
+                                                    </th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!--Fin de la tabla-->
+                                <div>
+                                    @*<div class="row">
+                                        <div class="pull-right">
+                                            <span class="text-bold float-right">Total: C$</span>
+                                            <span class="float-right" id="Total">0</span>
+                                            <br />
+                                            <span class="text-bold float-right">Cambio: C$</span><br />
+                                            <span class="text-bold float-right" id="txt-vuelto"></span>
+                                         </div>
+                                     </div>*@
+                              <!--     <div class="row">--> 
+                                <!--          <div class="pull-right">-->
+                                 <!--             <div class="col-lg-2 col-md-2 col-xs-6">-->
+                                  <!--                <div class="form-group float-right">-->
+                                    <!--                  <span class="text-bold float-right">Pago:</span>-->
+                                      <!--                <div class="input-group">-->
+                                         <!--                 <input type="number" id="txt-cambio" class="form-control" />-->
+                                         <!--                 <div class="input-group-btn">-->
+                                          <!--                    <button class="btn btn-primary btn-flat" id="btn-calcular-cambio" type="button"><span class="fa fa-dollar" id="btn-calcular-vuelto"></span>Calcular</button>-->
+                                            <!--              </div>-->
+                                             <!--         </div>-->
+                                           <!--           <span class="text-danger" id="error-calcular"></span>-->
+                                                    @*<span class="text-bold float-right">Cambio: C$</span><br />
+                                                    <span class="text-bold float-right" id="txt-vuelto"></span>*@
+                                            <!--      </div>-->
+                                    <!--          </div>-->
+                                   <!--       </div>-->
+                                <!--      </div>-->
+                                  </div>
+                                @*<div>
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-xs-3">
+                                        <div class="form-group">
+                                            
+                                            <span class="text-bold float-right">Pago:</span>
+                                            <input type="number" class="form-control" />
+                                            
+                                            <span class="text-bold float-right">Cambio:</span>
+                                            <span class="text-bold float-right">C$:</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>*@
+                                        <!---->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Botones" hidden="hidden">
+                                            <div class="form-group">
+                                                <button class="btn btn-danger" id="btnCancelar" type="reset"><i class="fa fa-remove"></i>&nbsp;Cancelar</button>
+                                                <button class="btn btn-primary" id="btnGuardarVenta" type="button" hidden="hidden"><i class="fa fa-save"></i>&nbsp;Guardar</button>&nbsp;
+                                            </div>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-error">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header btn-danger">
+                <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title" id="titulo_modal">Venta</h4>
+            </div>
+                <div class="modal-body">
+                    <h4 id="texto-informacion"></h4>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" data-dismiss="modal" value="Ok" />
+                </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Asset/js/jquery.js"></script>
+<script>
+
+</script>
+<script src="~/Asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+    $('#cmbProducto').on("select2:selecting", function (e) {
+        MostrarValores();
+    });
+    listarClientes()
+    listarProducto();
+
+    $(document).ready(function () {
+
+        $("#btnAgregar").click(function () {
+            Agregar();
+        });
+    });
+
+    var contador = 0;
+    total = 0;
+    subtotal = [];
+    //console.log("Funciona");
+    //$("#cmbProducto").change(MostrarValores);
+    
+    $('#cmbProducto').on("select2:selecting", function (e) {
+        console.log("y por que aqui no??");
+    });
+
+    
+    $("#Botones").hide();
+
+    function MostrarValores() {
+        //datosProducto = document.getElementById('cmbProducto').value.split('_');
+        datosProducto = $('#cmbProducto').select2().val().split('_');
+        //document.getElementById('cmbProducto').value.split('_');
+        $("#txtPrecio").val(datosProducto[1]);
+        $("#txtStock").val(datosProducto[2]);
+        //console.log(datosProducto)
+        //if (datosProducto[0]==0) {
+        //    $("#txtPrecio").val("");
+        //    $("#txtStock").val("");
+        //}
+    }
+
+
+    function Agregar() {
+        //$('#cmbProducto').select2().val();selecionar el value del select cuando se utiliza select2
+        datosProducto = $('#cmbProducto').select2().val().split('_'); //document.getElementById('cmbProducto').value.split('_');
+
+        id_producto = datosProducto[0];
+        //$('#cmbProducto :selected').text().split(' ');obtener el texto del sect con select 2
+        producto = $('#cmbProducto :selected').text();
+        cantidad = $("#txtCantidad").val();
+        precio = $("#txtPrecio").val();
+        stock = datosProducto[2];
+
+        //comprobacionStock = Comprobarcantidad(cantidad, stock);
+
+        if (id_producto > 0 && cantidad != "" && precio != "") {
+            if (stock > 0) {
+
+                data = { cantidad: cantidad, stock: stock };
+                var url = "/Ventas/comprobarstock";
+                $.post(url, data).done(function (Respuesta) {
+                    if (Respuesta.Respuesta) {
+                        subtotal[contador] = (cantidad * precio);
+                        total = total + subtotal[contador];
+                        var fila = '<tr class="selected" id="fila' + contador + '"><td hidden="hidden">' + id_producto + '</td><td>' + producto + '</td><td>' + cantidad + '</td><td>' + precio + '</td><td>' + subtotal[contador] + '</td><td><button type="button" class="btn btn-danger" onclick="Eliminar(' + contador + ');"><span class="fa fa-trash"></span></button></td></tr>';
+                        var aprobar = 0;
+                        $.each($("#tabla_detalle tbody tr"), function () {
+                            var id_productTable = $(this).find('td:eq(0)').html();
+                            if (id_producto == id_productTable) {
+
+                                aprobar = 1;
+                            }
+                        });
+
+                        if (aprobar == 0) {
+                            contador++;
+                            Limpiar();
+                            Evaluar();
+                            $("#Total").html(total);
+                            $("#tabla_detalle").append(fila);
+                            $('#cmbProducto').val('0_0_0');//cmbProducto
+                            $('#cmbProducto').trigger('change');
+                            //console.log("Porque no se agrego");
+                        } else {
+                            //alert("Error, este producto ya fue agragado al detalle");
+                            jQuery.noConflict();
+                            //la clave XD
+                            $("#texto-informacion").text("Error, este producto ya fue agragado al detalle").show();
+                            $("#modal-error").modal("show");
+                        }
+                    } else {
+                        //alert("Error, la cantidad es mayor al stock");
+                        jQuery.noConflict();
+                        //la clave XD
+                        $("#texto-informacion").text("Error, la cantidad es mayor al stock").show();
+                        $("#modal-error").modal("show");
+                    }
+                }).fail(function (jqxhr, status, error) {
+                    //alert(error);
+                    jQuery.noConflict();
+                    //la clave XD
+                    $("#texto-informacion").text("Ocurrio un error en el servidor y no se pudo guardar").show();
+                    $("#modal-error").modal("show");
+                    return false;
+                })
+
+            } else {
+                //alert("Error, el stock es 0");
+                jQuery.noConflict();
+                //la clave XD
+                $("#texto-informacion").text("Error, el stock es 0").show();
+                $("#modal-error").modal("show");
+            }
+        } else {
+            //alert("Error, hace falta un campos");
+            jQuery.noConflict();
+            //la clave XD
+            $("#texto-informacion").text("Error, hace falta llenar algunos campos, asegurese de haber digitado la cantidad o selecionado el producto").show();
+            $("#modal-error").modal("show");
+        }
+
+    }
+    //fin de agregar
+    function Limpiar() {
+        $("#txtStock").val("");
+        $("#txtCantidad").val("");
+        $("#txtPrecio").val("");
+        $("#cmbProducto").val('0');
+    }
+
+    function Evaluar() {
+        if (total > 0) {
+            $("#Botones").show();
+            $("#btnGuardar").show();
+        } else {
+            $("#Botones").hide();
+            $("#btnGuardar").hide();
+        }
+    }
+
+    function Eliminar(index) {
+        total = total - subtotal[index];
+        $("#Total").html( total);
+        $("#fila" + index).remove();
+        Evaluar();
+    }
+    //token = document.getElementsByName('__RequestVerificationToken');
+    function Guardarventa(data) {
+        debugger;
+        console.log(data);
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            //dataType: 'json',
+            type: 'POST',
+            url: "/Ventas/Create",
+            data: data,
+            success: function (result) {
+                if (result.Respuesta) {
+                    alert(result.Error);
+                    location.reload();
+                } else {
+                    alert(result.Error);
+                }
+            },
+            error: function () {
+                alert("Error en Ajax!")
+            }
+        });
+    }
+
+    $("#btnGuardarVenta").click(function (e) {
+        e.preventDefault();
+
+        var VentasArr = [];
+        VentasArr.length = 0;
+
+        //mpProveedor = $("#cmbProducto").val();
+        compCliente = $("#id_cliente").val();
+        if (compCliente != "0") {
+            $.each($("#tabla_detalle tbody tr"), function () {
+
+                VentasArr.push({
+                    id: 0,
+                    id_venta: 0,
+                    id_producto: $(this).find('td:eq(0)').html(),
+                    cantidad: $(this).find('td:eq(2)').html(),
+                    precio: $(this).find('td:eq(3)').html(),
+                    subtotal: "",
+                    iva: 0,
+                    descuento: 0
+                });
+            });
+
+            //var d = new Date().toDateString;
+            //var mes = d.getMonth()+1;
+            //var dia = d.getDate();
+            //var fecha = d.getFullYear() + '/' + (mes<10 ? '0': '') + mes + '/'+(dia<10 ? '0':'')+ day;
+
+
+            //var data = JSON.stringify({
+            //    id_cliente: compCliente,
+            //    fecha: "",
+            //    subtotal: total,
+            //    iva: 0,
+            //    descuento: 0,
+            //    detalle: VentasArr
+            //});
+
+            var data = JSON.stringify({
+                id_cliente: compCliente,
+                subtotal: total,
+                detalle: VentasArr
+            });
+
+            $.when(Guardarventa(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+
+        } else {
+            alert("Compruebe que los datos de la Compra como Num Factura, fecha y proveedor hallan sido digitados")
+        }
+
+    });
+
+    //////////////////////////
+    /////////////////////////
+    function listarClientes() {
+        $.get("/Ventas/listarClientes", function (data) {
+            llenarCombo(data, document.getElementById("id_cliente"), true);
+            $('#id_cliente').val('1');
+            $('#id_cliente').trigger('change');
+        });
+    }
+
+    function llenarCombo(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            //contenido += "<option value='0'>--- Seleccione ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+    function listarProducto() {
+        $.get("/Ventas/listarProductos", function (data) {
+            llenarComboProduct(data, document.getElementById("cmbProducto"), true);
+        });
+    }
+    function llenarComboProduct(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            contenido += "<option value='0_0_0'>--- Seleccione Producto ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + data[i].element2 + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+    //$(document).ready(function () {
+    //    $('.js-example-basic-single').select2();
+    //});
+
+    $(document).ready(function () {
+        $("#btn-calcular-cambio").click(function () {
+            total = $("#Total").text();
+            if (total!=0) {
+                pago = $("#txt-cambio").val();
+
+                cambio = pago - total;
+                $("#txt-vuelto").html(cambio);
+                $("#error-calcular").text("");
+            }
+            else {
+                $("#error-calcular").text("El total es 0, no hay cambio que calcular");
+            }
+            
+            
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn-listar-clientes").click(function () {
+            listarClientes();
+            $('#id_cliente').trigger('change');
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn_Nuevo_cliente").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/clientes/create";
+            a.click();
+        });
+    });
+
+</script>

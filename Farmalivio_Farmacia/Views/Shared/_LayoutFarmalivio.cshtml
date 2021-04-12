@@ -1,0 +1,284 @@
+﻿@*@{ 
+     Layout = null;
+ 
+}*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Farmalivio</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/Asset/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!--css de select2-->
+    <link href="~/Asset/bower_components/select-develop/dist/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Asset/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Asset/bower_components/Ionicons/css/ionicons.min.css">
+    <link href="~/Asset/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Asset/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/Asset/dist/css/skins/_all-skins.min.css">
+    
+    <link rel="shortcut icon" href="~/Asset/img/favicon.png">
+    <!-- Google Font -->
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="~/Inicio/index" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img src="~/Asset/img/favicon.png" width="50px" height="50px" /></span>
+                
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img src="~/Asset/img/favicon.png" width="50px" height="50px" />Farmalivio</span>
+               
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Notifications: style can be found in dropdown.less -->
+                       
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="imagen_de_usuario1">
+                                <img src="~/Asset/img/User.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs" id="nombre_de_usuario">@*@HttpContext.Current.Session["Nombreusuario"].ToString()*@</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header" id="Imagen_de_usuario">
+                                    <img src="~/Asset/img/User.png" class="img-circle" alt="User Image">
+                                    <p id="nombre_de_usuario2">
+                                        @*@HttpContext.Current.Session["Nombreusuario"].ToString()*@
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        @*<div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>*@
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="~/Perfil/index" class="btn btn-primary btn-flat">Mi Perfil</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="~/login/Logout" class="btn btn-primary btn-flat">Cerra Sesion</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li>
+                        <a href="~/Inicio/Index">
+                            <!--glyphicon glyphicon-envelope-->
+                            <i class="fa fa-home"></i> <span>Inicio</span>
+                            <span class="pull-right-container">
+                                <small class="label pull-right bg-green"></small>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-table"></i>
+                            <span>Catalogos</span>
+                            <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="~/Productos/index"><i class="fa fa-circle-o"></i> Productos</a></li>
+                            <li><a href="~/categorias/index"><i class="fa fa-circle-o"></i> Categorias</a></li>
+                            <li><a href="~/patologias/index"><i class="fa fa-circle-o"></i> Patologias</a></li>
+                            <li><a href="~/laboratorios/index"><i class="fa fa-circle-o"></i> Laboratorios</a></li>
+                            <li><a href="~/genericos/index"><i class="fa fa-circle-o"></i> Genericos</a></li>
+                            <li><a href="~/presentaciones/index"><i class="fa fa-circle-o"></i> Presentacion</a></li>
+                            <li><a href="~/medidas/index"><i class="fa fa-circle-o"></i> Medidas</a></li>
+                            <li><a href="~/Proveedores/index"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+                            <li><a href="~/Clientes/index"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Compras</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="~/compras/Index"><i class="fa fa-circle-o"></i> Compras</a></li>
+                            <li><a href="~/compras/Create"><i class="fa fa-circle-o"></i> Nueva Compra</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-tags"></i>
+                            <span>Ventas</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="~/ventas/index"><i class="fa fa-circle-o"></i> Ventas</a></li>
+                            <li><a href="~/Ventas/create"><i class="fa fa-circle-o"></i> Nueva Venta</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user-circle-o"></i> <span>Acceso</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="~/Usuarios/Index"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="~/bajar_producto/index"><i class="fa fa-level-down"></i> <span>Bajas</span></a></li>
+                    <li><a href="~/Reporte/index"><i class="fa fa-archive"></i> <span>Reporte</span></a></li>
+                   <!-- <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-archive"></i> <span>Reportes</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                        </ul>
+                    </li>-->
+                    <li><a href="~/Documentacion/index"><i class="fa fa-book"></i> <span>Documentacion</span></a></li>
+                    
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <section class="content">
+                <!--Cuerpo de las paginas-->
+                <!--Cuerpo de las paginas-->
+                <!--Cuerpo de las paginas-->
+                <!--Cuerpo de las paginas-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+               
+                <!--Cuerpo de las paginas-->
+                <!--Cuerpo de las paginas-->
+
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <strong><a>Realizado por:</a></strong><b> Abner Martinez - Jeffryn Lacayo</b>
+            </div>
+            <strong>Copyright &copy; 2019-2020 <a href="">ANR-CODE</a></strong>
+        </footer>
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- jQuery 3 -->
+    @*<script src="~/Asset/bower_components/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/Asset/js/jquery.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--Bootstrap select min-->
+    @*<script src="~/Asset/bower_components/select-develop/dist/js/select2.min.js"></script>*@
+    <script src="~/Asset/bower_components/select-develop/dist/js/select2.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Asset/dist/js/adminlte.min.js"></script>
+    <script src="~/Asset/js/jquery.js"></script>
+    <script src="~/Asset/js/jquery.validate.min.js"></script>
+    <script src="~/Asset/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Asset/js/jquery.form.min.js"></script>
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>*@
+</body>
+
+</html>
+<style>
+    tbody tr:nth-child(odd) {
+        background-color: #f1f3f3;/*#edeff0c7;*/
+    }
+    
+    tbody tr:nth-child(even) {
+        background-color: #FFFFFF;/*#ffffff;*/
+    }
+   
+    thead tr:nth-child(odd){
+        background-color: #3c8dbc;/*#4b96c1bf;*/
+        color: white;
+    }
+    tbody tr:hover {
+        background-color: #d3d2d2;/* #c1bfbfb5;*/
+    }
+</style>
+<script>
+    jQuery.noConflict();
+    $('#cmbProducto').on("select2:select", function (e) {
+        //console.log("Funciona en serio");
+        //setTimeout(MostrarValores(), 100);
+        MostrarValores();
+    });
+    
+    //$('#cmbProducto').on("change.select2", function (e) {
+    //    console.log("Funciona en serio");
+    //    setTimeout(MostrarValores(), 100);    
+    //    //MostrarValores();
+    //});
+    $(document).ready(function () {
+        jQuery.noConflict();
+        $('.js-example-basic-single').select2();
+    });
+    fetch('/Inicio/dtoUSer')
+        .then(function (response) {
+            return response.json()
+        })
+                   .then(function (nombre) {
+                       document.getElementById("nombre_de_usuario").innerHTML = nombre;
+                   })
+                    .catch(function () {
+                        console.log("algo fallo");
+                    })
+
+</script>

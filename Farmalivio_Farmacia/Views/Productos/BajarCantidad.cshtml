@@ -1,0 +1,184 @@
+﻿@model Farmalivio_Farmacia.Models.bajar_producto
+
+@{
+    ViewBag.Title = "BajarCantidad";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Baja de Producto</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Dar de baja<!--Nombre del catalogo actual -->
+                                    @*<a href="#" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>*@
+                                    <button type="button" id="btn-atras" class="btn btn-primary"><i class="fa fa-reply"></i>&nbsp;Atras</button>
+                                    @*<a href="@Url.Action("index", "Categorias")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>*@
+                                </div>
+                            </div><br />
+                            <!--formulario-->
+                            @using (Html.BeginForm("BajarCantidad", "Productos", FormMethod.Post, new { id = "frm-baja-producto" }))
+                            {
+                                @*@Html.AntiForgeryToken()*@
+
+                                <div class="row">
+                                    
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.id_detalle_producto, new { @class = "label label-danger", id = "id_producto" })
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <span hidden="hidden" class="label text-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion"></span>
+                                            @Html.LabelFor(model => model.id_motivo, "Cantidad", htmlAttributes: new { @class = "control-label " })
+                                            @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new { @class = "form-control", id = "cantidad" } })
+                                            @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger", id= "Error-cantidad" })
+                                            <div class="row">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.id_motivo, "Motivo", htmlAttributes: new { @class = "control-label " })
+                                            @Html.DropDownList("id_motivo", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.id_motivo, "", new { @class = "text-danger" })
+                                            <div class="col-md-10">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                        
+
+                                        <button type="button" data-target="#modal-confirm" data-toggle="modal" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
+                                    </div>
+
+
+                                    <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-confirm">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header btn-warning">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                                                        <span aria-hidden="true">X</span>
+                                                    </button>
+                                                    <h4 class="modal-title">Baja de prroducto</h4>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <p>Esta seguro de realizar esta baja?</p>
+                                                    <p>Una vez realizada no se podra retornar</p>
+                                                    <div class="icon">
+                                                        @*<i class="ion ion-ios-cart-outline"></i>*@
+                                                        <i class="fa fa-warning"></i>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" type="button" data-dismiss="modal">Cerrar</button>
+                                                    <button id="btn-guardar-baja" type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
+                                                    @*<button class="btn btn-primary" title="Cambiar Estado" href="@Url.Action("Changestate", "Productos", new {id=item.id_producto })" type="submit">Confirmar</button>*@
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<script src="~/Asset/js/jquery.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#btn-atras").click(function () {
+            var id_producto = $("#id_producto").val();
+            data = { id: id_producto };
+            console.log(data);
+            var url = "/Productos/ObtenerIdProd";
+            $.post("/Productos/ObtenerIdProd", data).done(function (IdProducto) {
+                location.href = "/Productos/Detail/" + IdProducto;
+            }).fail(function (jqxhr, status, error) {
+                console.log("Error al regresar");
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn-guardar-baja").click(function () {
+            guardarBaja();
+        });
+    });
+
+    function guardarBaja() {
+        //id_producto = $("#cmbProducto").val();//no sirve
+        //producto = $('#cmbProducto :selected').text();
+        id_motivo = $("#id_motivo").val();
+        
+        if ($("#cantidad").val() != null) {
+            $("#frm-baja-producto").on('submit', function (e) {
+                e.preventDefault();
+                var data = $(this).serialize()
+                console.log(data);
+                lote = $('#nlote').val();
+                $.post("/Productos/BajarCantidad", data)
+                   .done(function (respuesta, response, status, jqxhr) {
+                       if (respuesta.Respuesta) {
+                           alert("Se descremento el stock correctamente!!!");
+                           Redirigir();
+                       } else {
+                           $("#Error-cantidad").text(respuesta.Error).show();
+                           console.log(respuesta.ListaError);
+                           alert("upps!!!");
+                           
+                       }
+                   })
+               .fail(function (jqxhr, status, error) {
+                   alert(error);
+               })
+            })
+
+        }
+        else {
+            alert("Por que entro aqui");
+            $("#Error-cantidad").text("El campo es obligatorio").show();
+        }
+    }
+
+    function Redirigir() {
+            var id_producto = $("#id_producto").val();
+            data = { id: id_producto };
+            console.log(data);
+            var url = "/Productos/ObtenerIdProd";
+            $.post("/Productos/ObtenerIdProd", data).done(function (IdProducto) {
+                location.href = "/Productos/Detail/" + IdProducto;
+            }).fail(function (jqxhr, status, error) {
+                console.log("Error al regresar");
+            });
+    }
+
+</script>

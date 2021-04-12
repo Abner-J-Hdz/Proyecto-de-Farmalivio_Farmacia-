@@ -1,0 +1,125 @@
+﻿@model Farmalivio_Farmacia.ViewModel.ProductoViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Productos</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Producto<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("create", "Productos")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>
+                                </div>
+                            </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                            <!--form para buesqueda test-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                @using (Html.BeginForm("index", null, FormMethod.Get))
+                                {
+                                    <div class="row">
+                                        <div class="form-inline">
+                                            <select class="form-control col-md-3" id="opcion" name="criterio">
+                                                <option @(Model.Criterio == "Nombre" ? "selected" : "") value="Nombre">Nombre</option>
+                                                <option @(Model.Criterio == "Categoria" ? "selected" : "") value="Categoria">Categoria</option>
+                                                <option @(Model.Criterio == "Laboratorio" ? "selected" : "") value="Laboratorio">Laboratorio</option>
+                                                <option @(Model.Criterio == "Patologia" ? "selected" : "") value="Patologia">Patologia</option>
+                                                <option @(Model.Criterio == "Generico" ? "selected" : "") value="Generico">Generico</option>
+                                                <option @(Model.Criterio == "Codigo" ? "selected" : "") value="Codigo">Codigo</option>
+                                                <option @(Model.Criterio == "Presentacion" ? "selected" : "") value="Presentacion">Presentacion</option>
+                                                @*<option value="descripcion">Descripción</option>*@
+                                            </select>
+                                            @Html.TextBox("busqueda", "", new { @class = "form-control", @placeholder = "Escriba para buscar" })
+                                            <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span>Buscar</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <!--Tabla-->
+                                    <table class="table table-responsive table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Producto</th>
+                                                <th>Precio(Und)</th>
+                                                <th>Stock</th>
+                                                <th>Laboratorio</th>
+                                                <th>Generico</th>
+                                                @*<th>Descripcion</th>*@
+                                                <th>Categorias</th>
+                                                <th>Patologias</th>
+                                                <th>UndxCajas</th>
+                                                <th>Estado</th>
+                                                <th style="width:150px;">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Productos)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.codigo_producto)</td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.nombre_producto)
+                                                    @Html.DisplayFor(modelItem => item.nombre_presentacion)
+                                                    @Html.DisplayFor(modelItem => item.nombre_umedida)
+                                                    @Html.DisplayFor(modelItem => item.contiene)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem => item.precio_venta)</td>
+                                                <td style="background-color: #fdbd86;">@Html.DisplayFor(modelItem => item.stock)</td>
+
+                                                <td>@Html.DisplayFor(modelItem => item.nombre_laboratorio)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.nombre_generico)</td>
+                                                @*<td>@Html.DisplayFor(modelItem => item.descripcion_producto)</td>*@
+                                                <td>@Html.DisplayFor(modelItem => item.categorias)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.patologias)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.undxcajas)</td>
+                                                <td>@(item.estado == true ? "Activo" : "Inactivo")</td>
+                                                <td style="width:150px;">
+                                                    <a href="@Url.Action("Edit", "Productos", new { id = item.id_producto })" title="Editar" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>&nbsp;
+                                                    <a href="@Url.Action("Detail", "Productos", new { id = item.id_producto })" title="Detalle de Producto" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>&nbsp;
+                                                    
+                                                    <a  data-target="#modal-delete-@item.id_producto" data-toggle="modal" class="btn btn-danger btn-sm" title="Cambiar Estado"><i class="fa fa-refresh"></i></a>
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!-- ************* inicio paginacion ************-->
+                                </div>
+                            </div>
+                            @{Html.RenderPartial("modalDelete", Model);}
+
+
+                            <nav>
+                                @{Html.RenderPartial("_paginacion", Model);}
+                            </nav>
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+

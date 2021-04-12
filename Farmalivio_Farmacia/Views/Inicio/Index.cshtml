@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+    string nombre = @ViewBag.Name;
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Farmacia Farmalivio</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Sistema de Compra, Venta  y Control de Inventario<!--Nombre del catalogo actual -->
+                                    @*<a href="@Url.Action("create", "Laboratorios")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>*@
+                                </div>
+                            </div><br />
+                            <!---contenido-->
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Index","Compras")" class="label text-white">Compras</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("Create","Compras")">Nueva Compra</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-ios-cart-outline"></i>*@
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <p><h4><a href="~/Ventas/Index" class="label text-white">Ventas</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="~/Ventas/Create">Nueva venta</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-bag"></i>*@
+                                        <i class="fa fa-tags"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Index", "Productos")" class="label text-white">Productos</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("create", "Productos")">Nuevo Producto</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------->
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+    //audioBienvenida = document.getElementById('nombre_usuario').value;
+    
+    //audioBienvenida = "Bienvenido al sistema de Farmacia Farmalivio, Que tenga buen día, Abner Martinez";
+    //if (audioBienvenida!=null) {
+    //    voz(audioBienvenida);
+    //}
+
+    //function voz(mensaje) {
+    //    var vozHablar = new SpeechSynthesisUtterance(mensaje);
+    //    window.speechSynthesis.speak(vozHablar);
+    //}
+    //jQuery.noConflict();
+    //$(window).on("load", ObtenerUser);
+
+    //function ObtenerUser() {
+    //    $.get("/Inicio/dtoUSer", function (data) {
+    //        Escribirnombre(data, document.getElementById("id_patologia"))
+    //        //llenarCombo(data, document.getElementById("nombre_de_usuario"));
+    //    });
+    //}
+
+    //fetch('/Inicio/dtoUSer')
+    //    .then(function (response) {
+    //        return response.json() 
+    //    })
+    //               .then(function (nombre) {
+    //                   document.getElementById("nombre_de_usuario").innerHTML = nombre;                       
+    //               })
+    //                .catch(function () {
+    //                    console.log("algo fallo");
+    //                })
+
+    //function Escribirnombre(data, control) {
+    //    console.log(data);
+    //    $('#id_patologia').val(data.nombre);
+    //}
+</script>

@@ -1,0 +1,280 @@
+﻿@model Farmalivio_Farmacia.ViewModel.ProductoDetailViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Producto</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Detalle Producto<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Index", "Productos")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                            <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <h3 class="text-primary">@Model.Producto.nombre_producto | @Model.Producto.contiene @Model.Producto.nombre_umedida | @Model.Producto.nombre_presentacion | Lab: @Model.Producto.nombre_laboratorio</h3>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Descripcion: </label>
+                                    @Html.DisplayFor(model => model.Producto.descripcion_producto, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Codigo: </label>
+                                    @Html.DisplayFor(model => model.Producto.codigo_producto, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Stock: </label>
+                                    @Html.DisplayFor(model => model.Producto.stock, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Precio: </label>
+                                    @Html.DisplayFor(model => model.Producto.precio_venta, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Estado: </label>
+                                    @(Model.Producto.estado == true ? "Activo" : "Inactivo") 
+                                    @*@Html.DisplayFor(model => model.Producto.estado, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Generico: </label>
+                                    @Html.DisplayFor(model => model.Producto.nombre_generico, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Categorias: </label>
+                                    @Html.DisplayFor(model => model.Producto.categorias, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Patologias: </label>
+                                    @Html.DisplayFor(model => model.Producto.patologias, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <!--Tabla-->
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                @*<th>Producto</th>*@
+                                                <th>Lote</th>
+                                                <th>Vencimiento</th>
+                                                <th>UndxCajas</th>
+                                                <th>Cantidad cajas</th>
+                                                <th>Precio Compras</th>
+                                                <th>En Exposicion</th>
+                                                <th>Stock </th>
+                                                <th>Iva</th>
+                                                <th>PrecioCompra</th>
+                                                <th>Total</th>
+                                                <th>Opcion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Detalle_Producto)
+                                            {
+                                                <tr>
+                                                    <td>@item.lote.nlote</td>
+                                                    <td>@item.lote.fecha_vencimiento</td>
+                                                    <td>@item.undxcajas</td>
+                                                    <td>@item.numero_caja</td>
+                                                    <td>@item.precio_compra</td>
+                                                    <td>@(item.enexposicion == true ? "En Exposicion" : "En Bodega" )</td>
+                                                    <td>@item.stock</td>
+                                                    <td>@item.iva</td>
+                                                    <td>@item.precio_compra</td>
+                                                    @{ var ncajas = item.numero_caja;
+                                                        var precioshop = item.precio_compra;
+                                                        var iva = item.iva;
+
+                                                        var total = (ncajas * precioshop) + iva;
+                                                    }
+                                                    <td>@total</td>
+                                                    <td style="width: 100px;">
+                                                        <a href="@Url.Action("Mover", "Productos", new {id=item.id_detalle_producto })" title="Mover a Estante o Bodega" class="btn btn-success btn-sm"><i class="fa fa-sign-out"></i></a>&nbsp;
+                                                        @*<a data-target="#modal-bajar-@item.id_detalle_producto" data-toggle="modal" title="Dar de baja cantidad de producto" class="btn btn-danger btn-sm"><i class="fa fa-download"></i></a>*@
+
+                                                        <a href="@Url.Action("BajarCantidad", "Productos", new {id_detalle_producto=item.id_detalle_producto, id_producto = item.id_producto })" title="Dar de baja cantidad de producto" class="btn btn-danger btn-sm"><i class="fa fa-download"></i></a>
+                                                        @*<a data-target="#modal-delete-@item.id_producto" data-toggle="modal" class="btn btn-danger btn-sm" title="Cambiar Estado"><i class="fa fa-refresh"></i></a>*@
+
+                                                        <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-bajar-@item.id_detalle_producto">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header btn-danger">
+                                                                        <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                                                                            <span aria-hidden="true">X</span>
+                                                                        </button>
+                                                                        <h4 class="modal-title">Dar de baja una cantidad de producto</h4>
+                                                                    </div>
+                                                                    @using (Html.BeginForm("BajarCantidad", "Productos", FormMethod.Post, new { id = "frm-baja-producto" }))
+                                                                    {
+                                                                        <div class="modal-body">
+                                                                            <div class="form-horizontal">
+                                                                                <span hidden="hidden" class="field-validation-valid label label-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion"></span>
+                                                                                <!-- //////////////////los input ocultos del producto y cantidad ////////-->
+                                                                                <input class="label label-danger" data-val="true" data-val-number="The field id_detalle_producto must be a number." data-val-required="El campo id_detalle_producto es obligatorio." id="id_detalle_producto" name="id_detalle_producto" type="hidden" value="@(item.id_detalle_producto)">
+
+                                                                                <input class="label label-danger" data-val="true" data-val-number="The field id_detalle_producto must be a number." id="id_stock" name="id_stock" type="hidden" value="@(item.stock)">
+                                                                                <!-- //////////////////los input ocultos del producto y cantidad ////////-->
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label col-md-2" for="cantidad">Cantidad</label>
+                                                                                    <div class="col-md-10">
+                                                                                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field cantidad must be a number." data-val-required="El campo cantidad es obligatorio." id="cantidad-baja" name="cantidad" type="number" value="">
+                                                                                        <span class="field-validation-valid text-danger" id="Error-cantidad" data-valmsg-for="cantidad-baja" data-valmsg-replace="true"></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label col-md-2" for="id_motivo">Motivo</label>
+                                                                                    <div class="col-md-10">
+                                                                                        <select class="form-control" id="id_motivo" onload="" name="id_motivo"></select>
+                                                                                        <span class="field-validation-valid text-danger" data-valmsg-for="id_motivo" data-valmsg-replace="true"></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" class="btn btn-primary" value="Guardar" id="btn-guardar-baja" />
+                                                                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar" />
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- ************* inicio paginacion ************-->
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<script src="~/Asset/js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btn-guardar-baja").click(function () {
+            guardarBaja();
+        });
+    });
+
+    listarMotivos();
+
+    function listarMotivos() {
+        $.get("/Productos/listarMotivo", function (data) {
+            llenarCombo(data, document.getElementById("id_motivo"), false);
+        });
+    }
+
+    function llenarCombo(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            contenido += "<option value='0'>--- Seleccione ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+    function guardarBaja() {
+        //id_producto = $("#cmbProducto").val();//no sirve
+        //producto = $('#cmbProducto :selected').text();
+        id_motivo = $("#id_motivo").val();
+        
+        if ($("#cantidad-baja").val() != null) {
+            $("#frm-baja-producto").on('submit', function (e) {
+                e.preventDefault();
+                alert("estamos a punto de enviar los datos");
+                var data = $(this).serialize()
+                console.log(data);
+                lote = $('#nlote').val();
+                $.post("/Productos/BajarCantidad", data)
+                   .done(function (respuesta, response, status, jqxhr) {
+                       if (respuesta.Respuesta) {
+                           alert("Se descremento el stock correctamente!!!");
+                           location.reload();
+                       } else {
+                           $("#error-validacion").text(respuesta.Error).show();
+                           alert("upps!!!");
+                           location.reload();
+                       }
+                   })
+               .fail(function (jqxhr, status, error) {
+                   alert(error);
+               })
+            })
+
+        }
+        else {
+                alert("Por que entro aqui");
+                $("#Error-cantidad").text("El campo es obligatorio").show();
+        }
+    }
+
+
+    //$("#btnBajar").click(function (e) {
+    //    $("modal")
+    //})
+
+
+    //var data = JSON.stringify({
+    //    id_cliente: compCliente,
+    //    subtotal: total,
+    //    detalle: VentasArr
+    //});
+</script>

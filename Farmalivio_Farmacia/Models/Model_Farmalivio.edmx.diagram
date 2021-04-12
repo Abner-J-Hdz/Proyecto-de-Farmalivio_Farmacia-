@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a5a3dc030674a709894d7168ef4aca9" Name="Diagram1">
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.bajar_producto" Width="1.5" PointX="12.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.categoria" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.cliente" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.compra" Width="1.5" PointX="3" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.detalle_compra" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.detalle_devolucion" Width="1.5" PointX="15.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.detalle_producto" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.detalle_venta" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.devolucion" Width="1.5" PointX="13.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.estado" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.generico" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.laboratorio" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.lote" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.motivo" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.patologia" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.presentacion" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.producto" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.producto_categoria" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.producto_patologia" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.proveedor" Width="1.5" PointX="0.75" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.rol" Width="1.5" PointX="1.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.tipo_devolucion" Width="1.5" PointX="11.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.umedida" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.usuario" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.venta" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.table_test" Width="1.5" PointX="7.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.view_rpt_prodmasVendido" Width="1.5" PointX="8.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.view_rpt_ultimasVentas" Width="1.5" PointX="10.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.view_rpt_ventas" Width="1.5" PointX="7.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_buscar_producto_dev" Width="1.5" PointX="12.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_Compra_listado" Width="1.5" PointX="14.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_detalle_compra" Width="1.5" PointX="7.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_detalle_producto" Width="1.5" PointX="15.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_detalle_venta" Width="1.5" PointX="16.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_prod_devolver" Width="1.5" PointX="9.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_producto" Width="1.5" PointX="11.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_producto_categoria" Width="1.5" PointX="14.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_producto_patologia" Width="1.5" PointX="16.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_productos_a_vencerse" Width="1.5" PointX="13.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_productos_Agotados" Width="1.5" PointX="15.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_Productos_devolver" Width="1.5" PointX="17.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_proximo_a_Agotarse" Width="1.5" PointX="17.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Farmacia_FarmalivioModel.vista_venta" Width="1.5" PointX="18.75" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_bajar_producto_detalle_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_bajar_producto_motivo" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_bajar_producto_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_categoria_categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_venta_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_compra_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_compra_proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_compra_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_compra_compra" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_producto_compra" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_compra_lote" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_compra_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_producto_detalle_compra" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_devolucion_detalle_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_devolucion_devolucion" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_producto_lote" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_producto_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_venta_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_detalle_venta_venta" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_devolucion_proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_devolucion_tipo_devolucion" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_devolucion_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_venta_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_generico" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_laboratorio" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_patologia_patologia" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_presentacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_categoria_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_patologia_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_producto_umedida" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_usuario_rol" ManuallyRouted="false" />
+        <AssociationConnector Association="Farmacia_FarmalivioModel.FK_venta_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

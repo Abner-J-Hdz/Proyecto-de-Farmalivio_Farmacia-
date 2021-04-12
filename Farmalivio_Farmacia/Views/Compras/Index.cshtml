@@ -1,0 +1,107 @@
+﻿@model Farmalivio_Farmacia.ViewModel.CompraViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+<!--Revisar diseño en los div-->
+<div class="box-header with-border">
+    <h3 class="box-title">Compras</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <div>
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Compra<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Create", "Compras")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>
+                                </div>
+                            </div><br />
+                            <!--form para buesqueda test-->
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    @using (Html.BeginForm("index", null, FormMethod.Get))
+                                    {
+                                        <div class="row">
+                                            <div class="form-inline">
+                                                <select class="form-control col-md-3" id="opcion">
+                                                    <option>Proveedor</option>
+                                                    @*<option value="descripcion">Descripción</option>*@
+                                                </select>
+                                                @Html.TextBox("busqueda", "", new { @class = "form-control", @placeholder = "Escriba para buscar" })
+                                                <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span>Buscar</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="alert-danger">
+                                @ViewBag.Error
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <!---contenido-->
+                                    <table class="table table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Proveedor</th>
+                                                <th>Usuario</th>
+                                                <th>N° Factura</th>
+                                                <th>SubTotal</th>
+                                                <th>Descuento</th>
+                                                <th>IVA</th>
+                                                <th>Total</th>
+                                                <th style="width: 120px;">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Compras)
+                                        {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.nombre_proveedor)</td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.nombre_user)
+                                                        @Html.DisplayFor(modelItem => item.apellido_user)
+                                                    </td>
+                                                    <td>@Html.DisplayFor(modelItem => item.num_fact)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.subtotal)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.descuento)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.iva)</td>
+
+                                                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                                    <td>
+                                                        <a href="@Url.Action("Detail", "Compras", new {id=item.id_compra })" title="Ver Detalles" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>&nbsp;
+                                                        <a onclick="return confirm('¿Desea anular la compra?')" title="Anular Compra" href="@Url.Action("Anular", "Compras", new {id=item.id_compra })" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                            <nav>
+                                @{Html.RenderPartial("_paginacion", Model);}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+

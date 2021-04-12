@@ -1,0 +1,181 @@
+﻿@model Farmalivio_Farmacia.ViewModel.ProdDevolverViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Devoluciones</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Devolucion<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Index", "Devoluciones")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            <!-- Form de busqueda-->
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    @using (Html.BeginForm("index", null, FormMethod.Get))
+                                    {
+                                        <div class="row">
+                                            <div class="form-inline">
+                                                <select class="form-control col-md-3" id="opcion">
+                                                    <option>Proveedor</option>
+                                                    @*<option value="descripcion">Descripción</option>*@
+                                                </select><!--
+                                                <select name="busqueda" class="form-control col-md-3" id="opcion">
+                                                    <option>Proveedor</option>
+                                                    @*<option value="descripcion">Descripción</option>*@
+                                                </select>-->
+                                                @Html.TextBox("busqueda", "", new { @class = "form-control", @placeholder = "Escriba para buscar" })
+                                                <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span>Buscar</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div>
+                                <div class="table-responsive" id="tabla">
+                                    
+                                    <table class="table table-bordered" id="tablasxd">
+                                        <thead>
+                                            <tr>
+                                                <td>Producto</td>
+                                                <td>Stock</td>
+                                                <td>Fecha compra</td>
+                                                <td>Lote</td>
+                                                <td>Vencimiento</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.ProductosDevolver)
+                                            {
+                                                <tr>
+                                                    <td>@item.nombre_producto @item.nombre_umedida @item.contiene @item.nombre_laboratorio @item.nombre_presentacion</td>
+                                                    <td>@item.stock</td>
+                                                    <td>@item.fecha</td>
+                                                    <td>@item.nlote</td>
+                                                    <td>@item.fecha_vencimiento</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                    <nav>
+                                        @{Html.RenderPartial("_paginacion", Model);}
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <!-- Contenido -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<script src="~/Asset/bower_components/jquery/dist/jquery.js"></script>
+<script>
+    listarData();
+
+    function listarData() {
+        $.get("/Devoluciones/ObtenerDatos", function (data) {
+            console.log(data);
+            //console.log("-----la data-----");
+            //var llave = data.ProductosDevolver;
+            //console.log(llave);
+            //console.log("-----la llave-----");
+            //console.log(llave[0].contiene);
+            //console.log(llave[2].id_detalle_producto);
+            //console.log("-----las llaves-----");
+            //var m_llave = JSON.stringify(llave);
+            //console.log(m_llave);
+            //console.log("-----llave stringfy-----");
+            
+            crearListado(["Producto", "Stock", "Fecha Compra","Lote", "Vencimiento"], data);
+            //llenarCombo(data, document.getElementById("id_cliente"), true);
+        });
+
+    }
+
+    function llenarCombo(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            //contenido += "<option value='0'>--- Seleccione ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+    function crearListado(arrayColumnas, data) {
+        var contenido = "";
+        contenido += "<table id='tabla'  class='table' >";
+        contenido += "<thead>";
+        contenido += "<tr>";
+        for (var i = 0; i < arrayColumnas.length; i++) {
+            contenido += "<td>";
+            contenido += arrayColumnas[i];
+            contenido += "</td>";
+
+        }
+        contenido += "<td>Opciones</td>";
+        contenido += "</tr>";
+        contenido += "</thead>";
+        var misLlave = data.ProductosDevolver;
+        //var llaves = Object.keys(data[0]);
+        contenido += "<tbody>";
+
+        for (var a = 0; a < misLlave.length; a++) {
+            contenido += "<tr>";
+                contenido += "<td>";
+                contenido += misLlave[a].nombre_producto + " " + misLlave[a].nombre_umedida + " " + misLlave[a].contiene + " " + misLlave[a].nombre_laboratorio +" " + misLlave[a].nombre_presentacion;
+                contenido += "</td>";
+                contenido += "<td>";
+                    contenido += misLlave[a].stock;
+                    contenido += "</td>";
+                contenido += "<td>";
+                contenido += misLlave[a].fecha;
+                    contenido += "</td>";
+               contenido += "<td>";
+               contenido += misLlave[a].nlote;
+              contenido += "</td>";
+              contenido += "<td>";
+              contenido +=  misLlave[a].fecha_vencimiento ;
+              contenido += "</td>";
+
+            contenido += "</tr>";
+        }
+        @*<td>@item.nombre_producto @item.nombre_umedida @item.contiene @item.nombre_laboratorio @item.nombre_presentacion</td>
+        <td>@item.stock</td>
+        <td>@item.fecha</td>
+        <td>@item.nlote</td>
+        <td>@item.fecha_vencimiento</td>*@
+
+        contenido += "</tbody>";
+        contenido += "</table>";
+        document.getElementById("tabla").innerHTML = contenido;
+    }
+
+</script>

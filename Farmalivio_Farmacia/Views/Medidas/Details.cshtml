@@ -1,0 +1,43 @@
+﻿@model Farmalivio_Farmacia.Models.umedida
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>umedida</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_umedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_umedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_umedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_umedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_umedida }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

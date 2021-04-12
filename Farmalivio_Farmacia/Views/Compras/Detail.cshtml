@@ -1,0 +1,138 @@
+﻿@model Farmalivio_Farmacia.ViewModel.CompraDetalleViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Compra</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Detalle Compra<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Index", "Compras")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <h3 class="text-primary">Compra</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Proveedor: </label>
+                                    @Html.DisplayFor(model => model.Compra.proveedor.nombre_proveedor , new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Usuario: </label>
+                                    @Html.DisplayFor(model => model.Compra.usuario.nombre_user, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Fecha: </label>
+                                    @Html.DisplayFor(model => model.Compra.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>N° Fact: </label>
+                                    @Html.DisplayFor(model => model.Compra.num_fact, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Estado: </label>
+                                    @Html.DisplayFor(model => model.Compra.estado.nombre_estado, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                </div>
+                            </div>
+                            </div>
+                            <!--detalle-->
+                            <div class="row"> 
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <h3 class="text-primary">Detalle de compra</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Lote</th>
+                                                <th>Vencimiento</th>
+                                                <th>Cantidad cajas</th>
+                                                <th>UndxCajas</th>
+                                                <th>Precio Compras</th>
+                                                <th>Ttal Und</th>
+                                                <th>En Exposicion</th>
+                                                <th>Iva </th>
+                                                <th>Descuento</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.DetalleCompra)
+                                            {
+                                                <tr>
+                                                    <td>@item.producto.nombre_producto</td>
+
+                                                    <td>@item.lote.nlote</td>
+                                                    <td>@item.lote.fecha_vencimiento</td>
+                                                    <td>@item.cantidad_cajas</td>
+                                                    <td>@item.producto.undxcajas</td>
+                                                    <td>@item.precio_compra</td>
+                                                    <td>@item.total_und</td>
+                                                    <td>@(item.enexposicion== true ? "En exposicion" : "En bodega")</td>
+                                                    <td>@item.iva</td>
+                                                    <td>@item.descuento</td>
+                                                    <td>
+                                                        @{ var ncajas = item.cantidad_cajas;
+                                                            var precioshop = item.precio_compra;
+                                                            var iva = item.iva;
+                                                            var descuento = item.descuento;
+                                                            var total = (ncajas * precioshop) - descuento + iva;
+                                                        }
+                                                        @(total)
+                                                    </td>
+                                                </tr>
+                                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Tabla-->
+                            
+
+                            <!-- ************* inicio paginacion ************-->
+
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+

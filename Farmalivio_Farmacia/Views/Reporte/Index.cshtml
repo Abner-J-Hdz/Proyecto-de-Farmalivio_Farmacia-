@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Farmacia Farmalivio</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Reportes
+                                    @*<a href="@Url.Action("create", "Laboratorios")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>*@
+                                </div>
+                            </div><br />
+                            <!---contenido-->
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("ProductosA_Agotarse","Reporte")" target="_blank" class="label text-white">Productos Próximos<br />  a Agotarse</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("ProductosA_Agotarse","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-ios-cart-outline"></i>*@
+                                        @*<i class="fa fa-shopping-cart"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("ProductosAgotados","Reporte")" target="_blank" class="label text-white">Productos <br />   agotados</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("ProductosAgotados","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-bag"></i>*@
+                                        @*<i class="fa fa-tags"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Vencerse","Reporte")" target="_blank" class="label text-white">Productos Proximos<br />  a Vencerse</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("Vencerse","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="fa fa-calendar"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Productos_mas_Vendido","Reporte")" target="_blank" class="label text-white">Productos mas<br />  vendidos</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("Productos_mas_Vendido","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-bag"></i>*@
+                                        @*<i class="fa fa-tags"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Venta_de_Productos","Reporte")" target="_blank" class="label text-white">Productos vendidos<br />  las ultimas dos semanas</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("Venta_de_Productos","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-bag"></i>*@
+                                        @*<i class="fa fa-tags"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <p><h4><a href="@Url.Action("Ultimas_Ventas","Reporte")" target="_blank" class="label text-white">Ventas de las<br />  ultimas dos semanas</a></h4></p><br>
+                                        <p><h4><a class="label text-white" href="@Url.Action("Ultimas_Ventas","Reporte")" target="_blank">Ver Reporte</a></h4></p>
+                                    </div>
+                                    <div class="icon">
+                                        @*<i class="ion ion-bag"></i>*@
+                                        @*<i class="fa fa-tags"></i>*@
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!------------------->
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

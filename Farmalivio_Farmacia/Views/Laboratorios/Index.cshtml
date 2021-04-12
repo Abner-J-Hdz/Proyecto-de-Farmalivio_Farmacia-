@@ -1,0 +1,103 @@
+﻿@model Farmalivio_Farmacia.ViewModel.LaboratorioViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Laboratorios</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Laboratorio<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("create", "Laboratorios")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>
+                                </div>
+                            </div><br />
+
+                            <!--form para buesqueda test-->
+                            <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                @using (Html.BeginForm("index", null, FormMethod.Get))
+                                {
+                                    <div class="row">
+                                        <div class="form-inline">
+                                            <select class="form-control col-md-3" id="opcion">
+                                                <option>Laboratorio</option>
+                                                @*<option value="descripcion">Descripción</option>*@
+                                            </select>
+                                            @Html.TextBox("busqueda", "", new { @class = "form-control", @placeholder = "Escriba para buscar" })
+                                            <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span>Buscar</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                            <div class="table-responsive">
+                                <!--Tabla-->
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Laboratorio
+                                            </th>
+                                            <th>
+                                                Descripcion
+                                            </th>
+                                            <th>
+                                                Estado
+                                            </th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Laboratorios)
+                                        {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nombre_laboratorio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.descripcion_laboratorio)
+                                            </td>
+                                            <td>
+                                                @*@Html.DisplayFor(modelItem => item.estado)*@
+                                                @(item.estado == true ? "Activo" : "Inactivo")
+
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", "Laboratorios", new {id=item.id_laboratorio })" title="Editar" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>&nbsp;
+                                                <a onclick="return confirm('¿Desea cambiar el estado?')" title="Cambiar Estado" href="@Url.Action("Changestate", "Laboratorios", new {id=item.id_laboratorio })" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i></a>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <!-- ************* inicio paginacion ************-->
+                            <nav>
+                                @{Html.RenderPartial("_paginacion", Model);}
+                            </nav>
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

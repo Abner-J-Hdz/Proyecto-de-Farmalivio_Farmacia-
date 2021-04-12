@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Farmalivio_Farmacia.Models.view_rpt_ultimasVentas>
+
+@{
+    ViewBag.Title = "verventas";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>Ultimas ventas rpt_ultimas_ventas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vecesvendido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_vendida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_producto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vecesvendido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_vendida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total)
+        </td>
+       
+    </tr>
+}
+
+</table>

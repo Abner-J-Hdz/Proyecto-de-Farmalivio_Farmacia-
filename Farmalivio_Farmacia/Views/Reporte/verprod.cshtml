@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Farmalivio_Farmacia.Models.view_rpt_prodmasVendido>
+
+@{
+    ViewBag.Title = "verprod";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<h2>Productos mas vendidos rpt_prod_mas_vendido</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vecesvendido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad_vendida)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vecesvendido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantidad_vendida)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+            </tr>
+        }
+    </tbody>
+
+</table>
+</div>

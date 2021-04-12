@@ -1,0 +1,36 @@
+﻿@model Farmalivio_Farmacia.ViewModel.ProductoViewModel
+
+@foreach (var item in Model.Productos)
+{
+
+    <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-@item.id_producto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-warning">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                    <h4 class="modal-title">Cambiar Estado</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Confirme si desea cambiar el estado del producto</p>
+                    <div class="icon">
+                        @*<i class="ion ion-ios-cart-outline"></i>*@
+                        <i class="fa fa-warning"></i>
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cerrar</button>
+                    @*<button class="btn btn-primary" title="Cambiar Estado" href="@Url.Action("Changestate", "Productos", new {id=item.id_producto })" type="submit">Confirmar</button>*@
+                    <a title="Cambiar Estado" href="@Url.Action("Changestate", "Productos", new {id=item.id_producto })" class="btn btn-primary"><i class=""></i>Confirmar</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

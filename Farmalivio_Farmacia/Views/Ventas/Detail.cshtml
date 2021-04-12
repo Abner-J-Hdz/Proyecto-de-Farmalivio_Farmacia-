@@ -1,0 +1,115 @@
+﻿@model Farmalivio_Farmacia.ViewModel.VentaDetalleViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+
+<div class="box-header with-border">
+    <h3 class="box-title">Venta</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Detalle Venta<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("Index", "Ventas")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <h3 class="text-primary">Venta</h3>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Cliente:</label>
+                                        @Html.DisplayFor(model => model.Venta.cliente, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Usuario: </label>
+                                        @Html.DisplayFor(model => model.Venta.usuario, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Total: </label>
+                                        @Html.DisplayFor(model => model.Venta.total, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Fecha: </label>
+                                        @Html.DisplayFor(model => model.Venta.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Numero de Factura: </label>
+                                        @Html.DisplayFor(model => model.Venta.num_fact, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Estado: </label>
+                                        @Html.DisplayFor(model => model.Venta.nombre_estado, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="text-primary">Detalle de Venta</h3>
+                            <!--Tabla-->
+                            <div class="row">
+                                <div class="table-responsive">
+                                <table class="table table-bordered table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>Cod Producto</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>subtotal</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Detalle_Venta)
+                                    {
+                                    <tr>
+                                        <td>@item.codigo_producto</td>
+                                            <td>@item.nombre_producto</td>
+                                            <td>@item.cantidad</td>
+                                            <td>@item.precio</td>
+                                            <td>@item.subtotal</td>
+                                        </tr>
+                                                    }
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <!-- ************* inicio paginacion ************-->
+                            <!-- ************* fin paginacion ************-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+

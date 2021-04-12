@@ -1,0 +1,956 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Compras</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Compra<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("index", "Compras")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+
+                            <!---contenido-->
+                            @using (Html.BeginForm())
+                            {
+                                @*@Html.AntiForgeryToken()*@
+
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Proveedor</label>
+                                            <div class="input-group">
+                                                <select id="id_proveedor" class="form-control " name="id_proveedor" data-placeholder="seleccione proveedor" style="width: 100%;"></select>
+                                                <div class="input-group-btn">
+                                                    <!--<button type="button" id="btn_Nuevo_Proveedor" data-target="#modal-Prveedor" data-toggle="modal" title="Registrar un nuevo Proveedor" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>-->
+                                                    <button class="btn btn-primary" type="button" title="Cargar lista de Proveedores" id="btn-listar-proveedores"><span class="fa fa-history"></span><i class=""></i></button>
+                                                    <button type="button" id="btn_Nuevo_Proveedor_new" title="Registrar un nuevo Proveedor" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorProveedor"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--porveedor-->
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Fecha</label>
+                                            <input id="fecha" type="date" class="form-control" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorFechaCompra"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Numero de Factura</label>
+                                            <input id="numfact" type="text" class="form-control" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorNumFact"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Iva</label>
+                                            @*<input id="iva" type="checkbox" class="form-control" />*@
+                                            <div class="">
+                                                <input id="chkIva" class="checkbox " type="checkbox" />
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorIva" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            <!--<h3 class="text-light-blue">Añadir Producto al Detalle</h3>-->
+                            <!--************** Añadir a detalle ***************-->
+                            <!--***********************************************-->
+                                <div class="row bg-gray-light">
+                                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                        <h4 class="text-primary">Añadir Producto al Detalle</h4>
+                                    </div>
+                                </div>
+
+                                <div class="row bg-gray-light">
+                                    <!--Productos-->
+                                    <div class="col-lg-5 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Producto</label>
+                                            <div class="input-group">
+                                                <!--js-example-basic-single-->
+                                                <select id="cmbProducto" class="form-control js-example-basic-single " name="" style=""></select>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" title="Cargar lista de productos" id="btn-listar-productos"><span class="fa fa-history"></span><i class=""></i></button>
+                                                    <button type="button" id="btn_Nuevo_producto" title="Registrar un nuevo Producto" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorProducto" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Unidades por cajas-->
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Unidades x Cajas</label>
+                                            <input id="txtUndcajas" type="number" disabled="disabled" class="form-control" placeholder="Und x cajas" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorUndCajas" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Numero de cajas-->
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>N° Cajas</label>
+                                            <input id="txtcajas" type="number" class="form-control" placeholder="N° Cajas" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorCajas" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Precio Compra-->
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Precio Compra(Caja)</label>
+                                            <input id="txtPrecioCompra" type="number" class="form-control" placeholder="Precio x cajas" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorPrecioCompra" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                         <div class="form-group">
+                                             <label>Precio Venta(und)</label>
+                                             <input id="txtPrecioVenta" type="number" class="form-control" placeholder="Precio de Venta x Und" />
+                                             <div class="row">
+                                                 <div class="col-md-1 col-sm-1 col-xs-1">
+                                                     <span class="text-white">(*)</span>
+                                                 </div>
+                                                 <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                     <span id="errorPrecioVenta" class="text-white alert-danger"></span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>-->
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Descuento(C$)</label>
+                                            <input id="txtDescuento" type="number" value="0" class="form-control" placeholder="Descuento" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorDescuento" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Lote</label>
+                                            <div class="input-group">
+                                                <select id="cmbLote" class="form-control"></select>
+                                                <div class="input-group-btn">
+                                                    <button type="button" id="btn_Nuevo_Lote" data-target="#modal-lote" data-toggle="modal" title="Registrar un nuevo Lote" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>
+                                                <!--<input id="txtNlote" type="text" class="form-control" placeholder="Numero de Lote" />-->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorLote" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Vencimiento</label>
+                                            <input id="fvencimiento" type="date" class="form-control" disabled="disabled" />
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span>(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorVencimiento" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>En Exposicion</label>
+                                            @*<input id="iva" type="checkbox" class="form-control" />*@
+                                            <select id="cmbExpo" class="form-control ">
+                                                <option value="true">Si</option>
+                                                <option value="false">NO</option>
+                                            </select>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                    <span id="errorBodega" class="text-white alert-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @*<label>Agregar</label>*@
+                                            <div class="row"><label class="text-white"></label></div>
+                                            <div class="row">
+                                            </div>
+                                            <button class="btn btn-primary" type="button" id="btnAgregar"><i class="fa fa-plus"></i>&nbsp;Agregar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            <!--************** TABLA DE DETALLE ***************-->
+                            <!--***********************************************-->
+                                @*<div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <h4 class="text-primary">Detalle Compra</h4>
+                                    </div>
+                                    </div>*@
+                            <!--tablas de scaffold>-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-responsive" id="tabla_detalle">
+                                        <thead>
+                                            <tr>
+                                                <td hidden="hidden"></td>
+                                                <th>Producto</th>
+                                                <th>Precio Compra</th>
+                                                <th>Cajas</th>
+                                                <th>Und*Caja</th>
+                                                <th hidden="hidden"></th>
+                                                <th>Lote</th>
+                                                <th>Vencimiento</th>
+                                                <th hidden="hidden"></th>
+                                                <th>En Exposicion</th>
+                                                <th hidden="hidden"></th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            <!--Fin de la tabla-->
+                                <div class="row">
+                                    <div class="pull-right">
+                                        <span class="text-bold float-right">SubTotal:</span>
+                                        <span class="float-right" id="subtotal">0</span>
+                                        <br />
+                                        <span class="text-bold float-right">Iva:</span>
+                                        <span class="float-right" id="iva">0</span>
+                                        <br />
+                                        <span class="text-bold float-right">Descuento:</span>
+                                        <span class="" id="descuento">0</span>
+                                        <br />
+                                        <span class="text-bold float-right">Total:</span>
+                                        <span class="float-right" id="Total">0</span>
+                                    <div class="row">
+                                        @*<span class="text-bold">Iva:</span>
+                                        <span class="" id="iva">0</span>*@
+                                    </div>
+                                    <div class="row">
+                                        @*<span class="text-bold">Descuento:</span>
+                                        <span class="" id="descuento">0</span>*@
+                                    </div>
+                                    <div class="row">
+                                        @*<span class="text-bold">Total:</span>
+                                        <span class="" id="Total">0</span>*@
+                                    </div>
+                                    </div>
+                                </div>
+                            <!---->
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Botones" hidden="hidden">
+                                    <div class="form-group">
+                                        <button class="btn btn-danger" id="btn-reset" type="reset"><i class="fa fa-remove"></i>&nbsp;Cancelar</button>
+                                        <button class="btn btn-primary" id="btnGuardarCompra" type="button" hidden="hidden"><i class="fa fa-save"></i>&nbsp;Guardar</button>&nbsp;
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-lote">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-active">
+                <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Nuevo Lote</h4>
+            </div>
+            @using (Html.BeginForm("GuardarLote", "Compras", FormMethod.Post, new { id = "frm-lote" }))
+            {
+            <div class="modal-body">
+                <span hidden="hidden" class="field-validation-valid label label-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion-Lote"></span>
+                <div class="form-group">
+                    <label class="">Lote</label>
+                    <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 20" data-val-maxlength-max="20" data-val-minlength="Minimo de carateres 5" data-val-minlength-min="5" data-val-required="El campo es obligatorio." id="nlote" name="nlote" placeholder="Digite Numero de Lote" type="text" value="">
+                    <span hidden="hidden" class="field-validation-valid  text-danger" data-valmsg-for="nlote" data-valmsg-replace="true" id="nlote-validacion"></span>
+                </div>
+                <div class="form-group">
+                    <label class="">Fecha Vencimiento</label>
+
+                    @*<input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 50" data-val-maxlength-max="50" id="descripcion_presentacion" placeholder="Digite descripcion" name="descripcion_presentacion" type="text" value="">*@
+                    <input class="form-control" type="date" name="fecha_vencimiento" id="fecha_vencimiento" data-val-required="El campo es obligatorio." />
+                    @*<div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker" name="fecha_vencimiento" data-val-required="El campo es obligatorio" >
+                        </div>*@
+
+
+                    <span hidden="hidden" class="field-validation-valid text-danger" data-valmsg-for="fecha_vencimiento" data-valmsg-replace="true" id="fecha_vencimiento-validacion"></span>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Guardar" id="btn-guardar-lote" />
+                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar" />
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-Prveedor">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-active">
+                <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Nuevo Proveedor</h4>
+            </div>
+            @using (Html.BeginForm("GuardarProveedor","Compras",FormMethod.Post, new { id = "frm-proveedor" }))
+            {
+            <div class="modal-body">
+                <span hidden="hidden" class="field-validation-valid text-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion-Proveedor"></span>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="nombre_proveedor">Proveedor</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 25" data-val-maxlength-max="25" data-val-minlength="Minimo de carateres 2" data-val-minlength-min="2" data-val-required="El campo es obligatorio" id="nombre_proveedor" name="nombre_proveedor" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="nombre_proveedor" data-valmsg-replace="true" id="nombre_proveedor-validacion"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="direccion">Direccion</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 30" data-val-maxlength-max="30" id="direccion" name="direccion" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="direccion" data-valmsg-replace="true" id="direccion-validacion"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="ruc">RUC</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 25" data-val-maxlength-max="25" data-val-required="El campo es obligatorio" id="ruc" name="ruc" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ruc" data-valmsg-replace="true" id="ruc-validacion"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Guardar" id="btn-guardar-proveedor" />
+                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar" />
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/Asset/js/jquery.js"></script>
+@*<script src="~/Asset/js/bootstrap.min.js"></script>*@
+<script>
+    listarProveedores();
+    listarProductos();
+    listarLotes();
+
+    //my script for make the details
+
+    $(document).ready(function () {
+
+        $("#btnAgregar").click(function () {
+            Agregar();
+        });
+    });
+    //$("#cmbProducto").change(MostrarValores);//anterior
+    $('#cmbProducto').on("select2:selecting", function (e) {
+        MostrarValores();
+    });//usando jquery.select
+    function MostrarValores() {
+        //datosProducto = document.getElementById('cmbProducto').value.split('_');//anterior
+        datosProducto = $('#cmbProducto').select2().val().split('_');
+        $("#txtUndcajas").val(datosProducto[1]);
+    }
+
+    var contador = 0;
+    total = 0;
+    subtotal = [];
+    descTotal = [];
+    iva = [];
+    MiSub = 0;
+    MiTotal = 0;
+    Midescuento = 0;
+    Miiva = 0;
+    midesc = 0;
+    var estadochk = "";
+
+    $("#Botones").hide();
+
+
+    function Agregar() {
+        datosProducto = $('#cmbProducto').select2().val().split('_');
+        //datosProducto = document.getElementById('cmbProducto').value.split('_');//anterior
+
+        datosLote = document.getElementById('cmbLote').value.split('_');
+        id_producto = datosProducto[0];
+        //id_producto = $("#cmbProducto").val();//no sirve
+
+        //producto = $('#cmbProducto :selected').text();
+        producto = $("#cmbProducto option:selected").text();//anterior
+        cajas = $("#txtcajas").val();
+        precioCompra = $("#txtPrecioCompra").val();
+        unidadcaja = datosProducto[1];
+        //unidadcaja = $("#txtUndcajas").val();
+        //precioventa = $("#txtPrecioVenta").val();
+        id_lote = datosLote[0];
+        numlote = $("#cmbLote option:selected").text();
+
+        vencimiento = datosLote[1];
+        descuento = $("#txtDescuento").val();
+        midesc = parseFloat(descuento);
+
+        enexpoid = $("#cmbExpo").val();
+        enexpo = $("#cmbExpo option:selected").text();
+        //enexpo = document.getElementById("chkIva").checked;//mejor true o false
+        if (enexpo) {
+            estadochk = "Si"
+        }
+        else {
+            estadochk = "NO"
+        }
+        //state = document.getElementById("chkIva").checked;//mejor true o false
+        stock = unidadcaja * cajas;
+
+        if (id_producto > 0 && cajas > 0 && precioCompra > 0 && unidadcaja > 0 && numlote != "" && vencimiento != "" && descuento >= 0 && id_lote > 0) {
+            subtotal[contador] = (cajas * precioCompra);
+            total = total + subtotal[contador];
+            descTotal[contador] = midesc;
+
+            var aprobar = 0;
+            $.each($("#tabla_detalle tbody tr"), function () {
+                var id_ProductoTable = $(this).find('td:eq(0)').html();
+                if (id_producto == id_ProductoTable) {
+                    aprobar = 1;
+                }
+            });
+            if (aprobar == 0) {
+                var fila = '<tr class="selected" id="fila' + contador + '"><td hidden="hidden">' + id_producto + '</td><td><input type="hidden" name="id_producto[]" value="' + id_producto + '" />' + producto + '</td><td>' + precioCompra + '</td><td>' + cajas + '</td><td>' + unidadcaja + '</td><td hidden="hidden">' + id_lote + '</td><td>' + numlote + '</td><td>' + vencimiento + '</td><td hidden="hidden">' + enexpoid + '</td><td>' + enexpo + '</td><td hidden="hidden">' + descuento + '</td><td><button type="button" class="btn btn-danger btn-sm" onclick="Eliminar(' + contador + ');"><span class="fa fa-trash"></span></button></td></tr>'
+                contador++;
+                MiSub = MiSub + (precioCompra * cajas);
+                Limpiar();
+
+                Midescuento += midesc;
+                //$("#Total").html("C$ " + subtotal);
+                //$("#Subtotal").html("C$ " + MiSub);
+
+                var EsIva = document.getElementById("chkIva").checked;
+                if (EsIva) {
+                    //Miiva = Miiva + iva;
+                    Miiva = MiSub * 0.15;
+                    MiTotal = (MiSub + Miiva - Midescuento);
+                    $("#Total").html("C$ " + MiTotal);
+                    $("#iva").html("C$ " + Miiva);
+                    $("#descuento").html("C$ " + Midescuento);
+                    $("#subtotal").html("C$ " + MiSub);
+                    Evaluar();
+                    $("#tabla_detalle").append(fila);
+                } else {
+                    Miiva = 0;
+
+                    MiTotal = (MiSub - Midescuento);
+                    $("#Total").html("C$ " + MiTotal);
+                    $("#iva").html("C$ " + Miiva);
+                    $("#descuento").html("C$ " + Midescuento);
+                    $("#subtotal").html("C$ " + MiSub);
+                    Evaluar();
+                    $("#tabla_detalle").append(fila);
+                }
+
+            } else {
+                alert("Este Producto ya fue agregado")
+            }
+        } else {
+            alert("Falta llenar algunos campos obligatorios ")
+        }
+
+    }
+
+    function Limpiar() {
+        $("#txtcajas").val("");
+        $("#txtPrecioCompra").val("");
+        $("#txtUndcajas").val("");
+        //$("#txtPrecioVenta").val("");
+        //$("#txtNlote").val("");
+        //$("#fvencimiento").val("");
+    }
+
+    function Evaluar() {
+        if (MiTotal > 0) {
+            $("#Botones").show();
+            $("#btnGuardar").show();
+            document.getElementById("chkIva").disabled = true;
+        } else {
+            $("#Botones").hide();
+            $("#btnGuardar").hide();
+            document.getElementById("chkIva").disabled = false;
+        }
+    }
+
+    function Eliminar(index) {
+        //total = total - subtotal[index];
+        var EsIva = document.getElementById("chkIva").checked;
+        if (EsIva) {
+            Ivatemp = 0;
+            Ivatemp = subtotal[index] * 0.15;
+            MiSub = MiSub - subtotal[index];
+            Midescuento = Midescuento - descTotal[index];
+            MiTotal = MiTotal - subtotal[index] + descTotal[index] - (subtotal[index] * 0.15);
+            Miiva = MiSub * 0.15;
+            //if (MiSub==0) {
+            //    Miiva = 0;
+            //}
+            MiTotal = MiTotal - Miiva;
+        }
+        else {
+            MiSub = MiSub - subtotal[index];
+            MiTotal = MiTotal - subtotal[index] + descTotal[index];
+            Midescuento = Midescuento - descTotal[index];
+        }
+
+        $("#Total").html("C$ " + MiTotal);
+        $("#iva").html("C$ " + Miiva);
+        $("#descuento").html("C$ " + Midescuento);
+        $("#subtotal").html("C$ " + MiSub);
+        $("#fila" + index).remove();
+        Evaluar();
+    }
+
+    /////////
+
+    /////////////////////////////////
+    //recorrer lista
+    ///////////////////////////////////
+
+    function GuardarCompra(data, e) {
+        //debugger;
+        //console.log(data);
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            //dataType: 'json',
+            //contentType: 'json',
+            type: 'POST',
+            url: "/Compras/Create",
+            data: data,
+            success: function (result) {
+                alert(result);
+                location.reload();
+            },
+            error: function () {
+                alert("Error!")
+            }
+        });
+    }
+
+    $("#btnGuardarCompra").click(function (e) {
+        e.preventDefault();
+
+        var ComprasArr = [];
+        ComprasArr.length = 0;
+
+        compNumFact = $("#numfact").val();
+        compFecha = $("#fecha").val();
+        //mpProveedor = $("#cmbProducto").val();
+        compProveedor = $("#id_proveedor").val();
+        if (compNumFact != "" && compFecha != "" && compProveedor != "0") {
+            $.each($("#tabla_detalle tbody tr"), function () {
+
+                ComprasArr.push({
+                    id: 0,
+                    id_compra: 0,
+                    id_producto: $(this).find('td:eq(0)').html(),
+                    precio_compra: $(this).find('td:eq(2)').html(),
+                    //precio_venta: $(this).find('td:eq(5)').html(),
+                    //fecha_vencimiento: $(this).find('td:eq(9)').html(),
+                    enexposicion: $(this).find('td:eq(8)').html(),
+                    enexposicion: true,
+                    cantidad_cajas: $(this).find('td:eq(3)').html(),
+                    undxcajas: $(this).find('td:eq(4)').html(),
+                    id_lote: $(this).find('td:eq(5)').html(),
+                    total_und: 0,
+                    enexposicion: $(this).find('td:eq(8)').html(),
+                    descripcion: "",
+                    descuento: $(this).find('td:eq(10)').html()
+                });
+            });
+
+            var compras = {
+                id_proveedor: $("#id_proveedor").val(),
+                fecha: $("#fecha").val(),
+                numerofactura: $("#numfact").val(),
+                iva: Miiva,
+                subtotal: MiSub,
+                descuento: Midescuento,
+            }
+
+            var data = JSON.stringify({
+                id_proveedor: $("#id_proveedor").val(),
+                fecha: $("#fecha").val(),
+                numerofactura: $("#numfact").val(),
+                iva: Miiva,
+                subtotal: MiSub,
+                descuento: Midescuento,
+                detalle: ComprasArr
+            });
+
+            //console.log(data);
+            //var token =
+
+
+            $.when(GuardarCompra(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+
+        } else {
+            alert("Compruebe que los datos de la Compra como Num Factura, fecha y proveedor hallan sido digitados")
+        }
+
+    });
+
+    //OBTENER EL CHECKED DEL CHK
+    //var state = $('input:checkbox[name=chkIva]:checked').val();
+    //state = document.getElementById("chkIva").checked;//mejor true o false
+
+
+
+
+
+
+    $("#cmbLote").change(PonerFecha);
+
+    function PonerFecha() {
+        datosLote = document.getElementById('cmbLote').value.split('_');
+        $("#fvencimiento").val(datosLote[1]);
+    }
+
+    function listarProveedores() {
+        $.get("/Compras/listarProveedores", function (data) {
+            llenarCombo(data, document.getElementById("id_proveedor"), true);
+        });
+    }
+    function listarLotes() {
+        $.get("/Compras/listarLote", function (data) {
+            llenarComboProduct(data, document.getElementById("cmbLote"), true);
+        });
+    }
+    function listarProductos() {
+        $.get("/Compras/listarProductos", function (data) {
+            llenarComboProduct(data, document.getElementById("cmbProducto"), true);
+        });
+    }
+
+    function llenarCombo(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            contenido += "<option value='0'>--- Seleccione ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+    function llenarComboProduct(data, control, primerElemento) {
+        var contenido = "";
+        if (primerElemento == true) {
+            contenido += "<option value='0'>--- Seleccione ---</option>";
+        }
+        for (var i = 0; i < data.length; i++) {
+            contenido += "<option value='" + data[i].id + data[i].element2 + "'>";
+
+            contenido += data[i].category;
+
+            contenido += "</option>";
+        }
+        control.innerHTML = contenido;
+    }
+
+
+    $(document).ready(function () {
+        $("#btn-guardar-lote").click(function () {
+            guardarLote();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn-guardar-proveedor").click(function () {
+            //document.getElementById("btn-guardar-proveedor").disabled = true;
+            guardarProveedor();
+        });
+    });
+    
+    $(document).ready(function () {
+        $("#btn-reset").click(function () {
+            location.reload();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn-listar-productos").click(function () {
+            //alert("listando los productos");
+            listarProductos();
+            $('#cmbProducto').trigger('change');
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn-listar-proveedores").click(function () {
+            //alert("listando los productos");
+            listarProveedores();
+            $('#id_proveedor').trigger('change');
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn_Nuevo_producto").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/productos/create";
+            a.click();
+        });
+    });
+    $(document).ready(function () {
+        $("#btn_Nuevo_Proveedor_new").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/proveedores/create";
+            a.click();
+        });
+    });
+    // btn_Nuevo_Proveedor_new   btn-listar-proveedores
+    function guardarLote() {
+
+        if ($('#nlote').val() != null && $('#fecha_vencimiento').val() != null) {
+            $("#frm-lote").on('submit', function (e) {
+                e.preventDefault();
+                var data = $(this).serialize()
+                console.log(data);
+                lote = $('#nlote').val();
+                if (lote == "") {
+                    $("#nlote-validacion").text("El campo es obligatorio").show();
+                }
+                if (data.fecha_vencimiento == null) {
+                    $("#fecha_vencimiento-validacion").text("El campo es obligatorio").show();
+                }
+                $.post("/Compras/GuardarLote", data)
+                   .done(function (Respuesta, response, status, jqxhr) {
+                       if (Respuesta.Respuesta) {
+                           listarLotes();
+                           //var modalcategoria = document.getElementById('modal-categoria');
+                           //modalcategoria.classList.toggle('in');
+
+                           $('#nlote').val('');
+                           $('#fecha_vencimiento').val('');
+                           $("#fecha_vencimiento-validacion").text("").hide();
+                           alert("El Lote se agrego correctamente!!!");
+                       } else {
+                           $("#error-validacion").text(Respuesta.Error).show();
+                       }
+                   })
+               .fail(function (jqxhr, status, error) {
+                   alert(error);
+               })
+            })
+
+        }
+        else {
+            lote = $('#nlote').val();
+            fecha = $('#fecha_vencimiento').val();
+            if (lote == "") {
+                $("#nlote-validacion").text("El campo es obligatorio").show();
+                console.log(lote)
+            }
+
+            if (fecha == "") {
+                $("#fecha_vencimiento-validacion").text("El campo es obligatorio").show();
+            }
+        }//fin del if
+    }
+
+    function guardarProveedor() {
+        e.preventDefault();
+        if ($('#nombre_proveedor').val() != null && $('#ruc').val() != null) {
+        $("#frm-proveedor").on('submit', function (e) {
+            e.preventDefault();
+            var data = $(this).serialize()
+            proveedor = $('#nombre_proveedor').val();
+            if (proveedor == "") {
+                $("#nombre_proveedor-validacion").text("El campo es obligatorio").show();
+            }
+            if (data.ruc == null) {
+                $("#ruc-validacion").text("El campo es obligatorio").show();
+            }
+            $.post("/Compras/GuardarProveedor", data)
+               .done(function (Respuesta, response, status, jqxhr) {
+                   if (Respuesta.Respuesta == true) {
+                       listarProveedores();
+
+                       $('#nombre_proveedor').val('');
+                       $('#ruc').val('');
+                       $('#direccion').val('');
+                       $("#nombre_proveedor-validacion").text("").hide();
+                       $("#ruc-validacion").text("").hide();
+                       $("#direccion-validacion").text("").hide();
+                       document.getElementById("btn-guardar-proveedor").disabled = false;
+                       alert("El elProveedor se agrego correctamente!!!");
+                   } else {
+                       $("#error-validacion-Proveedor").text(Respuesta.ErrorEntidad).show();
+                       $("#nombre_proveedor-validacion").text(Respuesta.Error).show();
+                       $("#ruc-validacion").text(Respuesta.ErrorAdicional).show();
+                       document.getElementById("btn-guardar-proveedor").disabled = false;
+                   }
+               })
+           .fail(function (Respuesta, jqxhr, status, error) {
+               alert(error);
+               document.getElementById("btn-guardar-proveedor").disabled = false;
+           })
+        })
+
+        }
+        else {
+            e.preventDefault();
+            document.getElementById("btn-guardar-proveedor").disabled = false;
+            alert("que nta por que no da")
+            proveedor = $('#nombre_proveedor').val();
+            ruc = $('#ruc').val();
+            if (proveedor == "") {
+                document.getElementById("btn-guardar-proveedor").disabled = false;
+                $("#nombre_proveedor-validacion").text("El campo es obligatorio").show();
+                console.log(lote)
+            }
+
+            if (ruc == "") {
+                document.getElementById("btn-guardar-proveedor").disabled = false;
+                $("#ruc-validacion").text("El campo es obligatorio").show();
+            }
+        }//fin del if
+    }
+
+
+
+
+</script>
+
+<script>
+    //$(window).on("load", listarProveedores);
+    //$(window).on("load", listarProductos);
+    //$(window).on("load", listarLotes);
+
+
+</script>
+
+
+
+

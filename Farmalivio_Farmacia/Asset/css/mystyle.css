@@ -1,0 +1,8 @@
+﻿
+.login-page, .register-page{
+    background-image: url("../img/d.png");
+    height:90px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}

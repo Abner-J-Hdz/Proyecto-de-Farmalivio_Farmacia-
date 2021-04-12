@@ -1,0 +1,657 @@
+﻿@model Farmalivio_Farmacia.Models.producto
+@{
+    ViewBag.Title = "Create";
+    //List<Farmalivio_Farmacia.Models.patologia> patologias = ViewBag.id_categorias;
+    //List<Farmalivio_Farmacia.Models.categoria> categorias = ViewBag.id_patologias;
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Productos</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Producto<!--Nombre del catalogo actual -->
+                                    <a href="@Url.Action("index","Productos")" class="btn btn-primary"><i class="fa fa-reply "></i>&nbsp;Atras</a>
+                                </div>
+                            </div><br />
+                            @using (Html.BeginForm("GuardarEdit", "Productos", FormMethod.Post, new { id = "frm-producto-edit" }))
+                            {
+                                @*@Html.AntiForgeryToken()*@
+                                @Html.HiddenFor(model => model.id_producto, new { @class = "label label-danger", id = "id_producto" })
+                                <div class="row">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.nombre_producto, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.nombre_producto, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.nombre_producto, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.descripcion_producto, htmlAttributes: new { @class = "control-label " })
+                                            @Html.EditorFor(model => model.descripcion_producto, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.descripcion_producto, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.codigo_producto, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.codigo_producto, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.codigo_producto, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.contiene, htmlAttributes: new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    @Html.DropDownList("id_umedida", null, htmlAttributes: new { @class = "btn btn-default btn-flat" })
+                                                </div>
+                                                <!-- /btn-group -->
+                                                @Html.EditorFor(model => model.contiene, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.contiene, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.precio_venta, htmlAttributes: new { @class = "control-label " })
+                                            @Html.EditorFor(model => model.precio_venta, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.precio_venta, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.undxcajas, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.undxcajas, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.undxcajas, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.id_laboratorio, "Laboratorio", htmlAttributes: new { @class = "control-label" })
+                                            @*<div class="input-group">*@
+                                                @Html.DropDownList("id_laboratorio", null, htmlAttributes: new { @class = "form-control" })
+                                                @*<div class="input-group-btn">
+                                                    <button type="button" id="btn_Cargar_Laboratorio" class="btn btn-primary btn-flat"><span class="fa fa-history"></span></button>
+                                                    <button type="button" id="btn_Nuevo_Laboratorio" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>*@
+                                            @*</div>*@
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.id_laboratorio, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.id_presentacion, "Presentacion", htmlAttributes: new { @class = "control-label" })
+                                            @*<div class="input-group">*@
+                                                @Html.DropDownList("id_presentacion", null, htmlAttributes: new { @class = "form-control" })
+                                                @*<div class="input-group-btn">
+                                                    <button type="button" id="btn_Cargar_Presentacion" class="btn btn-primary btn-flat"><span class="fa fa-history"></span></button>
+                                                    <button type="button" id="btn_Nuevo_Presentacion" title="Registrar un nuevo Proveedor" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>*@
+                                            @*</div>*@
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.id_presentacion, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.id_generico, "Generico", htmlAttributes: new { @class = "control-label" })
+                                            @*<div class="input-group">*@
+                                                @Html.DropDownList("id_generico", null, htmlAttributes: new { @class = "form-control" })
+                                                @*<div class="input-group-btn">
+                                                    <button type="button" id="btn_Cargar_Generico" class="btn btn-primary btn-flat"><span class="fa fa-history"></span></button>
+                                                    <button type="button" id="btn_Nuevo_Generico" class="btn btn-primary btn-flat"><span class="fa fa-plus-circle"></span></button>
+                                                </div>*@
+                                            @*</div>*@
+                                            <div class="row">
+                                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                                    <span class="text-white">(*)</span>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    @Html.ValidationMessageFor(model => model.id_generico, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Añadir Patologias</label>
+                                                    <div class="input-group">
+                                                        <select id="id_patologia" class="form-control selectpicker" name="patologias" data-live-search="true"></select>
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-primary" type="button" id="btnAgregar"><i class=""></i>&nbsp;Agregar</button>|
+                                                            @*<button class="btn btn-primary btn-flat" type="button" id="btn_Nuevo_Patologia"><i class="fa fa-plus-circle"></i></button>*@
+                                                            <button class="btn btn-primary btn-flat" type="button" data-target="#modal-patologia" data-toggle="modal" id="btn_Nuevo_Patologia"><i class="fa fa-plus-circle"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1 col-sm-1 col-xs-1">
+                                                            <span>(*)</span>
+                                                        </div>
+                                                        <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                            @*<span id="errorpatologia"></span>*@
+                                                            @Html.ValidationMessage("patologia", new { @class = "text-danger", id = "patologia-validacion" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="box-body">
+                                                    <table class="table table-bordered table-responsive" id="tabla_patologias">
+                                                        <thead>
+                                                            <tr>
+                                                                <td hidden="hidden"></td>
+                                                                <th>Patologias</th>
+                                                                <th>Opciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    @*@Html.ValidationMessage("patologia", new { @class = "label label-danger", id = "patologia-validacion" })*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <label>Añadir Categoria</label>
+                                                    <div class="input-group">
+                                                        <select id="id_categoria" name="categorias" class="form-control"></select>
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-primary" type="button" id="btnAgregar_cat"><i class=""></i>&nbsp;Agregar</button>
+                                                            <button class="btn btn-primary btn-flat" type="button" data-target="#modal-categoria" data-toggle="modal" id="btn_Nuevo_Categoria"><i class="fa fa-plus-circle"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1 col-sm-1 col-xs-1">
+                                                            <span class="btn-sm">(*)</span>
+                                                        </div>
+                                                        <div class="col-md-11 col-sm-11 col-xs-11 ">
+                                                            @*<span id="errorpatologia"></span>*@
+                                                            @Html.ValidationMessage("categoria", new { @class = "text-danger", id = "categoria-validacion" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="box-body">
+                                                    <table class="table table-bordered table-responsive" id="tabla_categorias">
+                                                        <thead>
+                                                            <tr>
+                                                                <td hidden="hidden"></td>
+                                                                <th>Categorias</th>
+                                                                <th>Opciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    @*@Html.ValidationMessage("categoria", new { @class = "label label-danger", id = "categoria-validacion" })*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @Html.ValidationMessage("errorProducto", new { @class = "text-danger", id = "Producto-validacion" })
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-categoria">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-active">
+                <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Nueva Categoria</h4>
+            </div>
+            @using (Html.BeginForm("GuardarCategoria", "Productos", FormMethod.Post, new { id = "frm-categoria" }))
+            {
+                <div class="modal-body">
+                    <span hidden="hidden" class="field-validation-valid label label-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion"></span>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Categoria</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 20" data-val-maxlength-max="20" data-val-minlength="Minimo de carateres 2" data-val-minlength-min="2" data-val-required="El campo es obligatorio." id="nombre_categoria" name="nombre_categoria" placeholder="Nombre categoria" type="text" value="">
+                        <span hidden="hidden" class="field-validation-valid  text-danger" data-valmsg-for="nombre_categoria" data-valmsg-replace="true" id="nombre_categoria-validacion"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Descripcion</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 50" data-val-maxlength-max="50" id="descripcion_categoria" placeholder="Descripcion categoria" name="descripcion_categoria" type="text" value="">
+                        @*<input class="form-control" type="date" data-val-required="El campo Producto es obligatorio." />*@
+                        <span hidden="hidden" class="field-validation-valid text-danger" data-valmsg-for="descripcion_categoria" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Guardar" id="btn-guardar-categoria" />
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-patologia">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-active">
+                <button class="close" type="button" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Nueva Patologia</h4>
+            </div>
+            @using (Html.BeginForm("GuardarPatologia", "Productos", FormMethod.Post, new { id = "frm-patologia" }))
+            {
+                <div class="modal-body">
+                    <span hidden="hidden" class="field-validation-valid label label-danger" data-valmsg-for="" data-valmsg-replace="true" id="error-validacion"></span>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Patologia</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 20" data-val-maxlength-max="20" data-val-minlength="Minimo de carateres 2" data-val-minlength-min="2" data-val-required="El campo es obligatorio." id="nombre_patologia" name="nombre_patologia" placeholder="Nombre patologia" type="text" value="">
+                        <span hidden="hidden" class="field-validation-valid  text-danger" data-valmsg-for="nombre_patologia" data-valmsg-replace="true" id="nombre_patologia-validacion"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Descripcion</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="Maximo de carateres 50" data-val-maxlength-max="50" id="descripcion_patologia" placeholder="Descripcion patologia" name="descripcion_patologia" type="text" value="">
+                        @*<input class="form-control" type="date" data-val-required="El campo Producto es obligatorio." />*@
+                        <span hidden="hidden" class="field-validation-valid text-danger" data-valmsg-for="descripcion_patologia" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Guardar" id="btn-guardar-patologia" />
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Asset/js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnAgregar").click(function () {
+            Agregar();
+        });
+    });
+    $(document).ready(function () {
+        $("#btnAgregar_cat").click(function () {
+            AgregarCat();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn_Nuevo_Laboratorio").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/laboratorios/create";
+            a.click();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn_Nuevo_Generico").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/genericos/create";
+            a.click();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btn_Nuevo_Presentacion").click(function () {
+            var a = document.createElement("a");
+            a.target = "_blank";
+            a.href = "/presentaciones/create";
+            a.click();
+        });
+    });
+
+    var contador = 0;
+    ///Agregar las patologias a la  tabla para luego agregarlas al modole y guardar
+    function Agregar() {
+        id_patologia = $("#id_patologia").val();
+        patologia = $("#id_patologia option:selected").text();
+
+        var aprobar = 0;
+        $.each($("#tabla_patologias tbody tr"), function () {
+            var id_patologiaTable = $(this).find('td:eq(0)').html();
+            if (id_patologia == id_patologiaTable) {
+                aprobar = 1;
+            }
+        });
+
+        if (aprobar==0) {
+            var fila = '<tr id="fila' + contador + '"><td hidden="hidden">' + id_patologia + '</td> <td><input  hidden="hidden" id="patologias_selec" name="patologias_selec" value="' + id_patologia + '">' + patologia + '</td><td><button type="button" class="btn btn-danger btn-sm" onclick="Eliminar(' + contador + ');"><span class="fa fa-trash"></span></button></td></tr>';
+            $("#tabla_patologias").append(fila);
+            contador += 1;
+        }
+        else {
+                alert("La patologia ya fue agregada!!!")
+        }
+    }
+    ///Eliminar las patologias agregadas
+    function Eliminar(index) {
+        $("#fila" + index).remove();
+    }
+    ////////Elinar antiguas patologias y categorias
+    function EliminarOldPat(index) {
+        $("#pat" + index).remove();
+    }
+
+    function EliminarOldCat(index){
+        $("#cat" + index).remove();
+    }
+    //////////////////////////
+
+    function AgregarCat() {
+        id_categoria = $("#id_categoria").val();
+        categoria = $("#id_categoria option:selected").text();
+        var aprobar = 0;
+        $.each($("#tabla_categorias tbody tr"), function () {
+            var id_categoriaTable = $(this).find('td:eq(0)').html();
+            if (id_categoria == id_categoriaTable) {
+                aprobar = 1;
+            }
+        });
+
+        if (aprobar == 0) {
+            var fila = '<tr id="filacat' + contador + '"><td hidden="hidden">' + id_categoria + '</td> <td><input  hidden="hidden" id="categorias_selec" name="categorias_selec" value="' + id_categoria + '">' + categoria + '</td><td><button type="button" class="btn btn-danger btn-sm" onclick="EliminarCat(' + contador + ');"><span class="fa fa-trash"></span></button></td></tr>';
+            $("#tabla_categorias").append(fila);
+            contador += 1;
+        }
+        else {
+            alert("La categoria ya fue agregada!!!")
+        }
+    }
+    function EliminarCat(index) {
+        $("#filacat" + index).remove();
+    }
+
+    ///////////////////////////////////////////
+    //////cargar el listado de categorias
+    $(window).on("load", listarCategoria);
+    $(window).on("load", listarPatologia);
+    
+    ///cargar p atologia y categorias seleccionadas
+    $(document).ready(function () {
+        obtenerPatSelec();
+    });
+    $(document).ready(function () {
+        obtenerCatSelec();
+    });
+
+    function listarCategoria() {
+            $.get("/productos/listarCategoria", function (data) {
+                llenarCombo(data, document.getElementById("id_categoria"), true);
+            });
+    }
+
+    function listarPatologia() {
+        $.get("/productos/listarPatologia", function (data) {
+            llenarCombo(data, document.getElementById("id_patologia"), true);
+        });
+    }
+    //obtener categorias y patologias selecionadas
+    function obtenerCatSelec() {
+        idProduct = document.getElementById("id_producto").value;
+        $.get("/productos/CategoriaSelecc/" + idProduct, function (data) {
+            llenarTablaCat(data);
+        });
+    }
+
+    function obtenerPatSelec() {
+        //var id = document.getElementById("id_producto").value;
+        idProduct = document.getElementById("id_producto").value;
+        $.get("/productos/PatologiaSelecc/" + idProduct, function (data) {
+            llenarTablaPat(data);
+        });
+    }
+
+    function llenarTablaCat(data) {
+        for (var i = 0; i < data.length; i++) {
+            var fila = '<tr id="cat' + data[i].id_categoria + '"><td hidden="hidden">' + data[i].id_categoria + '</td> <td><input  hidden="hidden" id="categorias_selec' + data[i].id_categoria + '" name="categorias_selec" value="' + data[i].id_categoria + '">' + data[i].categoria + '</td><td><button type="button" class="btn btn-danger btn-sm" onclick="EliminarOldCat(' + data[i].id_categoria + ');"><span class="fa fa-trash"></span></button></td></tr>';
+            $("#tabla_categorias").append(fila);
+        }
+    }
+
+    function llenarTablaPat(data) {
+        for (var i = 0; i < data.length; i++) {
+            var fila = '<tr id="pat' + data[i].id_patologia + '"><td hidden="hidden">' + data[i].id_patologia + '</td> <td><input  hidden="hidden" id="patologias_selec' + data[i].id_patologia + '" name="patologias_selec" value="' + data[i].id_patologia + '">' + data[i].patologia + '</td><td><button type="button" class="btn btn-danger btn-sm" onclick="EliminarOldPat(' + data[i].id_patologia + ');"><span class="fa fa-trash"></span></button></td></tr>';
+            $("#tabla_patologias").append(fila);
+        }
+    }
+
+    function llenarCombo(data, control, primerElemento) {
+            var contenido = "";
+            if (primerElemento == true) {
+                //contenido += "<option value=''>--Seleccione--</option>";
+            }
+            for (var i = 0; i < data.length; i++) {
+                contenido += "<option value='" + data[i].id + "'>";
+
+                contenido += data[i].category;
+
+                contenido += "</option>";
+            }
+            control.innerHTML = contenido;
+    }
+
+    //////////////////////////////////////////
+    ////////////Funcion para gurdar por ajax la tabla de producto
+    ///////////con sus patologias
+        $("#frm-producto-edit").submit(function (e) {
+            e.preventDefault();
+            $("#patologia-validacion").text("").hide();
+            $("#categoria-validacion").text("").hide();
+            $("#Producto-validacion").text("").hide();
+            //var form = $(this);
+            //if (form.validate()) {
+            //    //debugger;
+            //    form.ajaxSubmit({
+
+            var data = $(this).serialize()
+            $.post("/Productos/GuardarEdit", data)
+                .done(function (respuesta, response, status, jqxhr) {
+                    if (respuesta.Respuesta) {
+                        window.location.href = '@Url.Action("Index", "Productos")';
+                    } else {
+                        if (respuesta.Error != "") {
+                            $("#patologia-validacion").text(respuesta.Error).show();
+                        }
+                        if (respuesta.Erroradicional != "") {
+                            $("#categoria-validacion").text(respuesta.ErrorAdicional).show();
+                        }
+                        if (respuesta.ErrorEntidad) {
+                            $("#Producto-validacion").text(respuesta.ErrorEntidad).show();
+                        }
+                    }
+                })
+                 .fail(function (jqxhr, status, error) {
+                     alert(error);
+                 })
+            return false;
+        })
+
+        $(document).ready(function () {
+            $("#btn-guardar-categoria").click(function () {
+                guardarCategoria();
+            });
+        });
+    ///funcion para guardar las categorias
+        function guardarCategoria() {
+            categoria = $("#nombre_categoria").val();
+            descripcion = $("#descripcion_categoria").val();
+            if (categoria != null) {
+                if (categoria.length > 2 && categoria.length < 20) {
+                    $("#frm-categoria").on('submit', function (e) {
+                        e.preventDefault();
+                        var data = $(this).serialize()
+                        $.post("/Productos/GuardarCategoria", data)
+                            .done(function (Respuesta, response, status, jqxhr) {
+                                if (Respuesta.Respuesta) {
+                                    listarCategoria();
+                                    //var modalcategoria = document.getElementById('modal-categoria');
+                                    //modalcategoria.classList.toggle('in');
+                                    $('#nombre_categoria').val('');
+                                    $('#descripcion_categoria').val('');
+                                    alert("La categoria se agrego correctamente!!!");
+                                } else {
+                                    alert(Respuesta.Error);
+                                    $("#error-validacion").text(Respuesta.Error).show();
+                                }
+
+                            })
+                        .fail(function (jqxhr, status, error) {
+                            alert(error);
+                        })
+                    })
+                } else {
+                    $("#nombre_categoria-validacion").text("Minimo de caracteres 2, Maximo 20").show();
+                }
+            } else {
+                $("#nombre_categoria-validacion").text("Categoria es Obligatorio").show();
+            }
+        }
+
+        $(document).ready(function () {
+            $("#btn-guardar-patologia").click(function () {
+                guardarPatologia();
+            });
+        });
+       
+        function guardarPatologia() {
+            patologia = $("#nombre_patologia").val();
+            descripcion = $("#descripcion_patologia").val();
+            if (patologia != null) {
+                if (patologia.length > 2 && patologia.length < 20) {
+                    $("#frm-patologia").on('submit', function (e) {
+                        e.preventDefault();
+                        var data = $(this).serialize()
+                        $.post("/Productos/GuardarPatologia", data)
+                            .done(function (Respuesta, response, status, jqxhr) {
+                                if (Respuesta.Respuesta) {
+                                    listarPatologia();
+                                    //var modalcategoria = document.getElementById('modal-categoria');
+                                    //modalcategoria.classList.toggle('in');
+
+                                    $('#nombre_patologia').val('');
+                                    $('#descripcion_patologia').val('');
+                                    alert("La patologia se agrego correctamente!!!");
+                                } else {
+                                    $("#error-validacion").text(Respuesta.Error).show();
+                                }
+                            })
+                        .fail(function (jqxhr, status, error) {
+                            alert(error);
+                        })
+                    })
+                } else {
+                    $("#nombre_patologia-validacion").text("Minimo de caracteres 2, Maximo 20").show();
+                }
+            } else {
+                $("#nombre_patologia-validacion").text("Categoria es Obligatorio").show();
+            }
+        }
+
+</script>
+

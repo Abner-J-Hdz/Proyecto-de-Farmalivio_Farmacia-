@@ -1,0 +1,98 @@
+﻿@model Farmalivio_Farmacia.ViewModel.BajasViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFarmalivio.cshtml";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title">Farmacia Farmalivio</h3>
+    <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <main class="main">
+                <div class="container-fluid">
+                    <!-- Ejemplo de tabla Listado -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="box-header bg-gray-light text-black">
+                                <div class="box-title">
+                                    <i class="fa fa-align-justify"></i> Bajas de productos<!--Nombre del catalogo actual -->
+                                    @*<a href="@Url.Action("create", "Laboratorios")" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;Nuevo</a>*@
+                                </div>
+                            </div><br />
+                            <!---contenido-->
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                               Fecha
+                                                
+                                            </th>
+                                            <th>
+                                               Producto
+                                            </th>
+                                            <th>
+                                               Cantidad(Und)
+                                            </th>
+                                            <th>
+                                              Motivo
+                                            </th>
+                                            <th>
+                                                Usuario
+                                            </th>
+                                            @*<th></th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Bajas)
+            {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.fecha)
+                                                   
+                                                </td>
+                                                <td>
+                                                    @(item.detalle_producto.producto.nombre_producto) @(item.detalle_producto.producto.contiene) @item.detalle_producto.producto.umedida.nombre_umedida @(item.detalle_producto.producto.presentacion.nombre_presentacion) @(item.detalle_producto.producto.laboratorio.nombre_laboratorio)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.cantidad)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.motivo.nombre_motivo)
+                                                </td>
+                                                <td>                                                  
+                                                    @(item.usuario.nombre_user ) @item.usuario.apellido_user
+                                                </td>
+                                                @*<td>
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.id_bajar_producto }) |
+                                                    @Html.ActionLink("Details", "Details", new { id = item.id_bajar_producto }) |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.id_bajar_producto })
+                                                </td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!------------------->
+
+                            <nav>
+                                @{Html.RenderPartial("_paginacion", Model);}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+
+
